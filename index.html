@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>外資期權籌碼儀表板</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, "Noto Sans TC", sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    #last-updated {
+      font-size: 0.82rem;
+      color: #64748b;
+    }
+
+    .signal-row {
+      max-width: 1100px;
+      margin: 0 auto 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .signal-card {
+      background: #1e2333;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    .signal-card .label {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .signal-card .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .signal-card .sub {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .bull {
+      color: #f87171;
+    }
+
+    .bear {
+      color: #34d399;
+    }
+
+    .neut {
+      color: #94a3b8;
+    }
+
+    /* 區塊標題 */
+    .section-title {
+      max-width: 1100px;
+      margin: 0 auto 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding-left: 4px;
+    }
+
+    .charts {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .chart-card {
+      background: #1e2333;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+
+    .chart-card h2 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 16px;
+    }
+
+    .chart-card canvas {
+      width: 100% !important;
+    }
+
+    .error-msg {
+      color: #f87171;
+      font-size: 0.85rem;
+      padding: 12px;
+      background: #2d1515;
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+
+    .legend-box {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #1e2333;
+      border: 1px solid #2d3748;
+      border-radius: 12px;
+      padding: 18px 24px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      line-height: 1.9;
+    }
+
+    .legend-box h3 {
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+    }
+
+    .legend-box span.bull {
+      color: #f87171;
+      font-weight: 600;
+    }
+
+    .legend-box span.bear {
+      color: #34d399;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🗂 外資期權籌碼儀表板</h1>
+    <span id="last-updated">載入中...</span>
+  </header>
+
+  <!-- 訊號卡片 -->
+  <div class="signal-row">
+    <div class="signal-card">
+      <div class="label">台股期貨 淨未平倉口數</div>
+      <div class="value" id="sig-txf-oi">—</div>
+      <div class="sub" id="sig-txf-oi-sub">口</div>
+    </div>
+    <div class="signal-card">
+      <div class="label">台股期貨 淨未平倉金額</div>
+      <div class="value" id="sig-txf-amt">—</div>
+      <div class="sub" id="sig-txf-amt-sub">千元</div>
+    </div>
+    <div class="signal-card">
+      <div class="label">期貨小計 淨未平倉口數</div>
+      <div class="value" id="sig-sub-oi">—</div>
+      <div class="sub" id="sig-sub-oi-sub">口</div>
+    </div>
+    <div class="signal-card">
+      <div class="label">期貨小計 淨未平倉金額</div>
+      <div class="value" id="sig-sub-amt">—</div>
+      <div class="sub" id="sig-sub-amt-sub">千元</div>
+    </div>
+    <div class="signal-card">
+      <div class="label">外資 Call 淨未平倉</div>
+      <div class="value" id="sig-call-oi">—</div>
+      <div class="sub" id="sig-call-oi-sub">正＝淨買Call看多</div>
+    </div>
+    <div class="signal-card">
+      <div class="label">外資 Put 淨未平倉</div>
+      <div class="value" id="sig-put-oi">—</div>
+      <div class="sub" id="sig-put-oi-sub">負＝淨賣Put看多</div>
+    </div>
+    <div class="signal-card">
+      <div class="label">全市場 P/C 未平倉比率</div>
+      <div class="value" id="sig-pc">—</div>
+      <div class="sub" id="sig-pc-sub">%</div>
+    </div>
+  </div>
+
+  <!-- 期貨圖表 -->
+  <div class="section-title">▍期貨部位</div>
+  <div class="charts">
+    <div class="chart-card">
+      <h2>📊 台股期貨 外資淨未平倉口數</h2>
+      <canvas id="chart-txf-oi" height="90"></canvas>
+    </div>
+    <div class="chart-card">
+      <h2>💰 台股期貨 外資淨未平倉金額（千元）</h2>
+      <canvas id="chart-txf-amt" height="90"></canvas>
+    </div>
+    <div class="chart-card">
+      <h2>📊 期貨小計 外資淨未平倉口數</h2>
+      <canvas id="chart-sub-oi" height="90"></canvas>
+    </div>
+    <div class="chart-card">
+      <h2>💰 期貨小計 外資淨未平倉金額（千元）</h2>
+      <canvas id="chart-sub-amt" height="90"></canvas>
+    </div>
+  </div>
+
+  <!-- 選擇權圖表 -->
+  <div class="section-title" style="margin-top:8px;">▍選擇權部位</div>
+  <div class="charts">
+    <div class="chart-card">
+      <h2>📈 外資選擇權 Call / Put 淨未平倉口數</h2>
+      <canvas id="chart-options" height="90"></canvas>
+    </div>
+    <div class="chart-card">
+      <h2>⚖️ 全市場 P/C 未平倉比率（%）</h2>
+      <canvas id="chart-pc" height="90"></canvas>
+    </div>
+  </div>
+
+  <!-- 說明 -->
+  <div class="legend-box">
+    <h3>判讀說明</h3>
+    <span class="bull">紅色＝多方訊號</span>，<span class="bear">綠色＝空方訊號</span>。<br>
+    期貨淨未平倉口數：正值代表外資淨多單，負值代表淨空單；持續增加代表方向性加碼。<br>
+    期貨淨未平倉金額：與口數搭配看，金額大代表押注部位重。<br>
+    Call 淨未平倉：正值代表外資買 Call 多於賣 Call，看漲傾向。<br>
+    Put 淨未平倉：負值代表外資賣 Put 多於買 Put，願意在低點承接，偏多訊號。<br>
+    P/C 比率：低於 80% 偏多，高於 120% 偏空；極端值可能是逆向指標。
+  </div>
+
+  <script>
+    const BASE = '';
+
+    const CHART_DEFAULTS = {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color: '#94a3b8', font: { size: 12 } } },
+        tooltip: { backgroundColor: '#1e2333', borderColor: '#2d3748', borderWidth: 1 }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#64748b', maxRotation: 45, font: { size: 11 } },
+          grid: { color: '#1e293b' }
+        },
+        y: {
+          ticks: { color: '#64748b', font: { size: 11 } },
+          grid: { color: '#1e293b' }
+        }
+      }
+    };
+
+    function formatNum(n) {
+      if (n == null) return '—';
+      return (n >= 0 ? '+' : '') + n.toLocaleString();
+    }
+
+    function setSignal(id, value, subId, subText, isPositiveBull = true) {
+      const el = document.getElementById(id);
+      const sub = document.getElementById(subId);
+      el.textContent = formatNum(value);
+      if (value != null) {
+        const isBull = isPositiveBull ? value > 0 : value < 0;
+        el.className = 'value ' + (value === 0 ? 'neut' : isBull ? 'bull' : 'bear');
+      }
+      if (sub && subText) sub.textContent = subText;
+    }
+
+    async function fetchJSON(path) {
+      const resp = await fetch(path + '?t=' + Date.now());
+      if (!resp.ok) throw new Error(`無法載入 ${path}（${resp.status}）`);
+      return resp.json();
+    }
+
+    function makeBarChart(canvasId, labels, data) {
+      const colors = data.map(v => v >= 0 ? 'rgba(248,113,113,0.85)' : 'rgba(52,211,153,0.85)');
+      return new Chart(document.getElementById(canvasId), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{ data, backgroundColor: colors, borderRadius: 3 }]
+        },
+        options: {
+          ...CHART_DEFAULTS,
+          plugins: { ...CHART_DEFAULTS.plugins, legend: { display: false } }
+        }
+      });
+    }
+
+    function makeLineChart(canvasId, labels, datasets) {
+      return new Chart(document.getElementById(canvasId), {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+          ...CHART_DEFAULTS,
+          elements: { point: { radius: 2, hoverRadius: 5 } }
+        }
+      });
+    }
+
+    function showError(canvasId, msg) {
+      document.getElementById(canvasId).insertAdjacentHTML(
+        'afterend', `<div class="error-msg">⚠️ ${msg}</div>`
+      );
+    }
+
+    async function init() {
+      let lastDate = '—';
+
+      // ── 期貨
+      try {
+        const futures = await fetchJSON(BASE + 'data/futures.json');
+        const labels = futures.map(d => d.date.slice(5));
+        lastDate = futures.at(-1)?.date ?? lastDate;
+
+        const txfOI = futures.map(d => d.txf?.net_oi ?? 0);
+        const txfAmt = futures.map(d => d.txf?.net_oi_amount ?? 0);
+        const subOI = futures.map(d => d.subtotal?.net_oi ?? 0);
+        const subAmt = futures.map(d => d.subtotal?.net_oi_amount ?? 0);
+
+        // 訊號卡片
+        const lat = futures.at(-1);
+        if (lat) {
+          const txfDir = lat.txf?.net_oi > 0 ? '淨多' : (lat.txf?.net_oi < 0 ? '淨空' : '持平');
+          const subDir = lat.subtotal?.net_oi > 0 ? '淨多' : (lat.subtotal?.net_oi < 0 ? '淨空' : '持平');
+          setSignal('sig-txf-oi', lat.txf?.net_oi, 'sig-txf-oi-sub', `口（${txfDir}）`);
+          setSignal('sig-txf-amt', lat.txf?.net_oi_amount, 'sig-txf-amt-sub', '千元');
+          setSignal('sig-sub-oi', lat.subtotal?.net_oi, 'sig-sub-oi-sub', `口（${subDir}）`);
+          setSignal('sig-sub-amt', lat.subtotal?.net_oi_amount, 'sig-sub-amt-sub', '千元');
+        }
+
+        makeBarChart('chart-txf-oi', labels, txfOI);
+        makeBarChart('chart-txf-amt', labels, txfAmt);
+        makeBarChart('chart-sub-oi', labels, subOI);
+        makeBarChart('chart-sub-amt', labels, subAmt);
+
+      } catch (e) {
+        ['chart-txf-oi', 'chart-txf-amt', 'chart-sub-oi', 'chart-sub-amt']
+          .forEach(id => showError(id, e.message));
+      }
+
+      // ── 選擇權
+      try {
+        const opts = await fetchJSON(BASE + 'data/options_pc.json');
+        const labels = opts.map(d => d.date.slice(5));
+        const callOI = opts.map(d => d.net_call_oi ?? 0);
+        const putOI = opts.map(d => d.net_put_oi ?? 0);
+
+        const lat = opts.at(-1);
+        if (lat) {
+          setSignal('sig-call-oi', lat.net_call_oi, 'sig-call-oi-sub', '正＝淨買Call看多');
+          setSignal('sig-put-oi', lat.net_put_oi, 'sig-put-oi-sub', '負＝淨賣Put看多', false);
+        }
+
+        makeLineChart('chart-options', labels, [
+          {
+            label: 'Call 淨未平倉',
+            data: callOI,
+            borderColor: '#f87171',
+            backgroundColor: 'rgba(248,113,113,0.1)',
+            fill: true, tension: 0.3,
+          },
+          {
+            label: 'Put 淨未平倉',
+            data: putOI,
+            borderColor: '#34d399',
+            backgroundColor: 'rgba(52,211,153,0.1)',
+            fill: true, tension: 0.3,
+          }
+        ]);
+
+      } catch (e) {
+        showError('chart-options', e.message);
+      }
+
+      // ── P/C Ratio
+      try {
+        const pc = await fetchJSON(BASE + 'data/pc_ratio.json');
+        const labels = pc.map(d => d.date.slice(5));
+        const pcOI = pc.map(d => d.pc_oi ?? 0);
+
+        const lat = pc.at(-1);
+        if (lat) {
+          const sentiment = lat.pc_oi > 120 ? '偏空' : (lat.pc_oi < 80 ? '偏多' : '中立');
+          document.getElementById('sig-pc').textContent = lat.pc_oi?.toFixed(2) ?? '—';
+          document.getElementById('sig-pc').className =
+            'value ' + (lat.pc_oi > 120 ? 'bear' : (lat.pc_oi < 80 ? 'bull' : 'neut'));
+          document.getElementById('sig-pc-sub').textContent = `%（${sentiment}）`;
+        }
+
+        makeLineChart('chart-pc', labels, [
+          {
+            label: 'P/C 未平倉比率 %',
+            data: pcOI,
+            borderColor: '#818cf8',
+            backgroundColor: 'rgba(129,140,248,0.1)',
+            fill: true, tension: 0.3, pointRadius: 2,
+          }
+        ]);
+
+      } catch (e) {
+        showError('chart-pc', e.message);
+      }
+
+      document.getElementById('last-updated').textContent = `最後更新：${lastDate}`;
+    }
+
+    init();
+  </script>
+</body>
+
+</html>

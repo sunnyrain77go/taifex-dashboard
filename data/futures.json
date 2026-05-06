@@ -1,0 +1,347 @@
+[
+  {
+    "date": "2026/03/30",
+    "txf": {
+      "long_txn": 77702,
+      "short_txn": 75037,
+      "net_txn": 2665,
+      "net_txn_amount": 17156339,
+      "long_oi": 8986,
+      "short_oi": 46268,
+      "net_oi": -37282,
+      "net_oi_amount": -242198179
+    },
+    "subtotal": {
+      "long_txn": 648238,
+      "short_txn": 643117,
+      "net_txn": 5121,
+      "net_txn_amount": 22147254,
+      "long_oi": 210746,
+      "short_oi": 481078,
+      "net_oi": -270332,
+      "net_oi_amount": -302729144
+    }
+  },
+  {
+    "date": "2026/03/31",
+    "txf": {
+      "long_txn": 86706,
+      "short_txn": 86638,
+      "net_txn": 68,
+      "net_txn_amount": 385271,
+      "long_oi": 10045,
+      "short_oi": 47259,
+      "net_oi": -37214,
+      "net_oi_amount": -237847154
+    },
+    "subtotal": {
+      "long_txn": 736226,
+      "short_txn": 726906,
+      "net_txn": 9320,
+      "net_txn_amount": 9084981,
+      "long_oi": 219260,
+      "short_oi": 480272,
+      "net_oi": -261012,
+      "net_oi_amount": -286470958
+    }
+  },
+  {
+    "date": "2026/04/01",
+    "txf": {
+      "long_txn": 85126,
+      "short_txn": 80802,
+      "net_txn": 4324,
+      "net_txn_amount": 28091111,
+      "long_oi": 14923,
+      "short_oi": 46296,
+      "net_oi": -31373,
+      "net_oi_amount": -209523889
+    },
+    "subtotal": {
+      "long_txn": 653389,
+      "short_txn": 621513,
+      "net_txn": 31876,
+      "net_txn_amount": 48629435,
+      "long_oi": 234681,
+      "short_oi": 475462,
+      "net_oi": -240781,
+      "net_oi_amount": -250199366
+    }
+  },
+  {
+    "date": "2026/04/02",
+    "txf": {
+      "long_txn": 86899,
+      "short_txn": 90367,
+      "net_txn": -3468,
+      "net_txn_amount": -23202640,
+      "long_oi": 11742,
+      "short_oi": 46597,
+      "net_oi": -34855,
+      "net_oi_amount": -226613380
+    },
+    "subtotal": {
+      "long_txn": 713994,
+      "short_txn": 715970,
+      "net_txn": -1976,
+      "net_txn_amount": -29260767,
+      "long_oi": 232807,
+      "short_oi": 475074,
+      "net_oi": -242267,
+      "net_oi_amount": -272445294
+    }
+  },
+  {
+    "date": "2026/04/20",
+    "txf": {
+      "long_txn": 53905,
+      "short_txn": 54540,
+      "net_txn": -635,
+      "net_txn_amount": -4790194,
+      "long_oi": 18280,
+      "short_oi": 60898,
+      "net_oi": -42618,
+      "net_oi_amount": -317446913
+    },
+    "subtotal": {
+      "long_txn": 498960,
+      "short_txn": 520727,
+      "net_txn": -21767,
+      "net_txn_amount": -12560925,
+      "long_oi": 200585,
+      "short_oi": 505197,
+      "net_oi": -304612,
+      "net_oi_amount": -399622049
+    }
+  },
+  {
+    "date": "2026/04/21",
+    "txf": {
+      "long_txn": 56915,
+      "short_txn": 55580,
+      "net_txn": 1335,
+      "net_txn_amount": 10122697,
+      "long_oi": 20082,
+      "short_oi": 61377,
+      "net_oi": -41295,
+      "net_oi_amount": -314265416
+    },
+    "subtotal": {
+      "long_txn": 529481,
+      "short_txn": 532515,
+      "net_txn": -3034,
+      "net_txn_amount": 10318215,
+      "long_oi": 214671,
+      "short_oi": 521941,
+      "net_oi": -307270,
+      "net_oi_amount": -398914824
+    }
+  },
+  {
+    "date": "2026/04/22",
+    "txf": {
+      "long_txn": 58624,
+      "short_txn": 59884,
+      "net_txn": -1260,
+      "net_txn_amount": -9569146,
+      "long_oi": 19557,
+      "short_oi": 62112,
+      "net_oi": -42555,
+      "net_oi_amount": -325287372
+    },
+    "subtotal": {
+      "long_txn": 507620,
+      "short_txn": 524111,
+      "net_txn": -16491,
+      "net_txn_amount": -21402750,
+      "long_oi": 210125,
+      "short_oi": 533883,
+      "net_oi": -323758,
+      "net_oi_amount": -422443540
+    }
+  },
+  {
+    "date": "2026/04/23",
+    "txf": {
+      "long_txn": 81079,
+      "short_txn": 82557,
+      "net_txn": -1478,
+      "net_txn_amount": -11121604,
+      "long_oi": 18185,
+      "short_oi": 62212,
+      "net_oi": -44027,
+      "net_oi_amount": -333338089
+    },
+    "subtotal": {
+      "long_txn": 854642,
+      "short_txn": 845979,
+      "net_txn": 8663,
+      "net_txn_amount": -9285856,
+      "long_oi": 215176,
+      "short_oi": 530721,
+      "net_oi": -315545,
+      "net_oi_amount": -424681875
+    }
+  },
+  {
+    "date": "2026/04/24",
+    "txf": {
+      "long_txn": 87607,
+      "short_txn": 84205,
+      "net_txn": 3402,
+      "net_txn_amount": 26094070,
+      "long_oi": 20056,
+      "short_oi": 60689,
+      "net_oi": -40633,
+      "net_oi_amount": -318774412
+    },
+    "subtotal": {
+      "long_txn": 757320,
+      "short_txn": 737386,
+      "net_txn": 19934,
+      "net_txn_amount": 29504338,
+      "long_oi": 229069,
+      "short_oi": 524812,
+      "net_oi": -295743,
+      "net_oi_amount": -409975388
+    }
+  },
+  {
+    "date": "2026/04/27",
+    "txf": {
+      "long_txn": 75634,
+      "short_txn": 79237,
+      "net_txn": -3603,
+      "net_txn_amount": -28732448,
+      "long_oi": 18523,
+      "short_oi": 62746,
+      "net_oi": -44223,
+      "net_oi_amount": -353116641
+    },
+    "subtotal": {
+      "long_txn": 764277,
+      "short_txn": 790611,
+      "net_txn": -26334,
+      "net_txn_amount": -51574539,
+      "long_oi": 226063,
+      "short_oi": 547947,
+      "net_oi": -321884,
+      "net_oi_amount": -467540192
+    }
+  },
+  {
+    "date": "2026/04/28",
+    "txf": {
+      "long_txn": 60657,
+      "short_txn": 62255,
+      "net_txn": -1598,
+      "net_txn_amount": -12686862,
+      "long_oi": 17922,
+      "short_oi": 63791,
+      "net_oi": -45869,
+      "net_oi_amount": -364544299
+    },
+    "subtotal": {
+      "long_txn": 580608,
+      "short_txn": 598771,
+      "net_txn": -18163,
+      "net_txn_amount": -29854939,
+      "long_oi": 224054,
+      "short_oi": 562853,
+      "net_oi": -338799,
+      "net_oi_amount": -497586174
+    }
+  },
+  {
+    "date": "2026/04/29",
+    "txf": {
+      "long_txn": 63721,
+      "short_txn": 63787,
+      "net_txn": -66,
+      "net_txn_amount": -510021,
+      "long_oi": 18063,
+      "short_oi": 65137,
+      "net_oi": -47074,
+      "net_oi_amount": -371735161
+    },
+    "subtotal": {
+      "long_txn": 579115,
+      "short_txn": 592020,
+      "net_txn": -12905,
+      "net_txn_amount": -8358811,
+      "long_oi": 225985,
+      "short_oi": 574773,
+      "net_oi": -348788,
+      "net_oi_amount": -503023935
+    }
+  },
+  {
+    "date": "2026/04/30",
+    "txf": {
+      "long_txn": 70159,
+      "short_txn": 67153,
+      "net_txn": 3006,
+      "net_txn_amount": 23751130,
+      "long_oi": 19569,
+      "short_oi": 63613,
+      "net_oi": -44044,
+      "net_oi_amount": -346598854
+    },
+    "subtotal": {
+      "long_txn": 650091,
+      "short_txn": 648547,
+      "net_txn": 1544,
+      "net_txn_amount": 29664604,
+      "long_oi": 234227,
+      "short_oi": 581703,
+      "net_oi": -347476,
+      "net_oi_amount": -472061123
+    }
+  },
+  {
+    "date": "2026/05/04",
+    "txf": {
+      "long_txn": 63806,
+      "short_txn": 64682,
+      "net_txn": -876,
+      "net_txn_amount": -7352466,
+      "long_oi": 21596,
+      "short_oi": 65100,
+      "net_oi": -43504,
+      "net_oi_amount": -357252707
+    },
+    "subtotal": {
+      "long_txn": 602262,
+      "short_txn": 591606,
+      "net_txn": 10656,
+      "net_txn_amount": 3076831,
+      "long_oi": 240470,
+      "short_oi": 583446,
+      "net_oi": -342976,
+      "net_oi_amount": -490011440
+    }
+  },
+  {
+    "date": "2026/05/05",
+    "txf": {
+      "long_txn": 55251,
+      "short_txn": 59358,
+      "net_txn": -4107,
+      "net_txn_amount": -33541466,
+      "long_oi": 20156,
+      "short_oi": 68843,
+      "net_oi": -48687,
+      "net_oi_amount": -399603752
+    },
+    "subtotal": {
+      "long_txn": 577051,
+      "short_txn": 607390,
+      "net_txn": -30339,
+      "net_txn_amount": -57876419,
+      "long_oi": 236029,
+      "short_oi": 604796,
+      "net_oi": -368767,
+      "net_oi_amount": -549956593
+    }
+  }
+]

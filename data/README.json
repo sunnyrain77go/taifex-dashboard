@@ -1,0 +1,14 @@
+{
+  "futures.json": {
+    "說明": "外資台指期貨未平倉歷史",
+    "核心欄位": "net_oi = 淨未平倉口數（正=淨多，負=淨空）"
+  },
+  "options_pc.json": {
+    "說明": "外資選擇權P/C Ratio歷史",
+    "核心欄位": "pc_ratio = Put未平倉/Call未平倉（>1偏空，<1偏多）"
+  },
+  "oi_strike.json": {
+    "說明": "當日各履約價未平倉分布（每日覆蓋）",
+    "核心欄位": "strikes[].call_oi / put_oi"
+  }
+}
