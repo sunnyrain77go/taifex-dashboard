@@ -193,5 +193,18 @@
     "put_buy_oi": 18286,
     "put_sell_oi": 15762,
     "net_put_oi": 2524
+  },
+  {
+    "date": "2026/05/06",
+    "call_buy_txn": 124878,
+    "call_sell_txn": 125865,
+    "call_buy_oi": 12398,
+    "call_sell_oi": 10452,
+    "net_call_oi": 1946,
+    "put_buy_txn": 138899,
+    "put_sell_txn": 141668,
+    "put_buy_oi": 16855,
+    "put_sell_oi": 14443,
+    "net_put_oi": 2412
   }
 ]

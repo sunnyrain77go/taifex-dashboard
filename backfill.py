@@ -1,14 +1,21 @@
-# backfill.py
-# 用法：python backfill.py 2026-05-05 2026-05-05
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+backfill.py
+補抓歷史資料
 
+用法：python backfill.py 2026-01-01 2026-05-05
+"""
+
+import sys
 import time
 import os
-import sys
 from datetime import datetime, timedelta
 
-# 把 fetch_taifex 的三個函式 import 進來
-from fetch_taifex import fetch_futures, fetch_options, fetch_pc_ratio
+from fetch_taifex import fetch_futures, fetch_options, fetch_pc_ratio, fetch_oi_strike
 import fetch_taifex as ft
+from fetch_stock_net import fetch_stock_net
+
 
 def backfill(start_str, end_str):
     start = datetime.strptime(start_str, "%Y-%m-%d")
@@ -23,9 +30,9 @@ def backfill(start_str, end_str):
             current += timedelta(days=1)
             continue
 
-        # 覆寫模組全域日期變數
-        query_date = current.strftime("%Y-%m-%d")
-        label_date = current.strftime("%Y/%m/%d")
+        query_date = current.strftime("%Y-%m-%d")   # 期交所格式
+        label_date = current.strftime("%Y/%m/%d")   # JSON 存檔格式
+        twse_date  = current.strftime("%Y%m%d")     # 證交所格式
 
         print(f"\n{'='*40}")
         print(f"抓取：{label_date}")
@@ -34,11 +41,14 @@ def backfill(start_str, end_str):
         fetch_futures(query_date, label_date)
         fetch_options(query_date, label_date)
         fetch_pc_ratio(query_date, label_date)
+        fetch_oi_strike(query_date, label_date)
+        fetch_stock_net(twse_date, label_date)
 
         current += timedelta(days=1)
-        time.sleep(2)  # 加在這裡，每天抓完等 2 秒再抓下一天
+        time.sleep(2)   # 避免請求過快被擋
 
     print("\n\n✓ 補齊完成")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

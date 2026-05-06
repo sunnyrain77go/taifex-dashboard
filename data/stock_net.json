@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026/05/04",
+    "foreign": 669.76,
+    "foreign_dealer": 0.0,
+    "foreign_total": 669.76,
+    "trust": 20.28,
+    "dealer_self": 14.27,
+    "dealer_hedge": 75.14,
+    "dealer_total": 89.41,
+    "total": 779.45,
+    "foreign_5d": 669.76
+  },
+  {
+    "date": "2026/05/05",
+    "foreign": 39.9,
+    "foreign_dealer": 0.0,
+    "foreign_total": 39.9,
+    "trust": 37.27,
+    "dealer_self": 5.8,
+    "dealer_hedge": -106.67,
+    "dealer_total": -100.87,
+    "total": -23.7,
+    "foreign_5d": 709.66
+  },
+  {
+    "date": "2026/05/06",
+    "foreign": 751.05,
+    "foreign_dealer": 0.0,
+    "foreign_total": 751.05,
+    "trust": 17.8,
+    "dealer_self": -43.94,
+    "dealer_hedge": -52.16,
+    "dealer_total": -96.1,
+    "total": 672.75,
+    "foreign_5d": 1460.71
+  }
+]

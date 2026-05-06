@@ -5,7 +5,6 @@ on:
     # UTC 08:35 = 台灣時間 16:35（週一到週五）
     - cron: '35 8 * * 1-5'
   workflow_dispatch:
-    # 允許在 GitHub 介面手動觸發，方便測試
 
 jobs:
   fetch:
@@ -23,14 +22,16 @@ jobs:
       - name: 安裝套件
         run: pip install -r requirements.txt
 
-      - name: 執行抓取腳本
+      - name: 抓取期交所資料
         run: python fetch_taifex.py
+
+      - name: 抓取現貨買賣超
+        run: python fetch_stock_net.py
 
       - name: Commit 並 Push 資料
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/
-          # 如果沒有新資料（假日或已存在）就不 commit
           git diff --cached --quiet || git commit -m "data: 更新 $(date +'%Y-%m-%d')"
           git push

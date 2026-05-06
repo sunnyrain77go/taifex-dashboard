@@ -1,6 +1,8 @@
 import os
 import json
 import requests
+import pandas as pd
+from io import StringIO
 from config import DATA_DIR, HEADERS
 
 def load_json(filepath):
@@ -32,12 +34,19 @@ def make_session():
         pass
     return s
 
+def flatten_cols(df):
+    df.columns = [
+        "_".join(str(x).strip() for x in col) if isinstance(col, tuple) else str(col).strip()
+        for col in df.columns
+    ]
+    return df
+
 def post_and_parse(session, url, payload):
     try:
         resp = session.post(url, data=payload, timeout=30)
-        if resp.status_code != 200:
-            return None
-        return resp.text
+        resp.raise_for_status()
+        resp.encoding = "utf-8"
+        return pd.read_html(StringIO(resp.text))
     except Exception as e:
-        print(f"  [錯誤] 請求失敗: {e}")
+        print(f"  [錯誤] 請求或解析失敗: {e}")
         return None

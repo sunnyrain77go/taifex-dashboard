@@ -21,8 +21,9 @@ from io import StringIO
 from datetime import datetime, date
 
 from config import DATA_DIR
-from utils import load_json, save_json, already_exists, make_session
+from utils import load_json, save_json, already_exists, make_session, post_and_parse, flatten_cols
 import options_analysis
+from fetch_stock_net import fetch_stock_net, STOCK_NET_JSON
 
 # ============================================================
 # 設定（在 Colab 測試時修改這裡的日期）
@@ -45,28 +46,7 @@ PC_JSON      = os.path.join(DATA_DIR, "pc_ratio.json")
 # (已搬移至 utils.py)
 
 
-def post_and_parse(session, url, payload):
-    try:
-        resp = session.post(url, data=payload, timeout=30)
-        resp.raise_for_status()
-        resp.encoding = "utf-8"
-        tables = pd.read_html(StringIO(resp.text))
-        for t in tables:
-            if t.shape == (1, 2) and "查無" in str(t.values):
-                print("  [警告] 期交所回傳查無資料，請確認日期是否為交易日")
-                return None
-        return tables
-    except Exception as e:
-        print(f"  [錯誤] {e}")
-        return None
-
-
-def flatten_cols(df):
-    df.columns = [
-        "_".join(str(x).strip() for x in col) if isinstance(col, tuple) else str(col)
-        for col in df.columns
-    ]
-    return df
+# (已搬移至 utils.py)
 
 
 def safe_int(val):
@@ -373,10 +353,14 @@ if __name__ == "__main__":
     fetch_pc_ratio(TODAY_QUERY, TODAY_LABEL)
     print()
     options_analysis.fetch_oi_strike(TODAY_LABEL, TODAY_LABEL)
+    print()
+    print()
+    fetch_stock_net(TODAY_QUERY.replace("-", ""), TODAY_LABEL)
+    print()
 
     print("\n=== 完成 ===")
     print(f"\n產出檔案：")
-    for f in [FUTURES_JSON, OPTIONS_JSON, PC_JSON, options_analysis.OI_STRIKE_JSON]:
+    for f in [FUTURES_JSON, OPTIONS_JSON, PC_JSON, options_analysis.OI_STRIKE_JSON, STOCK_NET_JSON]:
         if os.path.exists(f):
             records = load_json(f)
             count = len(records) if isinstance(records, list) else 1
