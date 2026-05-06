@@ -20,6 +20,10 @@ import sys
 from io import StringIO
 from datetime import datetime, date
 
+from config import DATA_DIR
+from utils import load_json, save_json, already_exists, make_session
+import options_analysis
+
 # ============================================================
 # 設定（在 Colab 測試時修改這裡的日期）
 # ============================================================
@@ -28,55 +32,17 @@ from datetime import datetime, date
 TODAY_QUERY = datetime.now().strftime("%Y-%m-%d")
 TODAY_LABEL = datetime.now().strftime("%Y/%m/%d")
 
-DATA_DIR     = "data"
 FUTURES_JSON = os.path.join(DATA_DIR, "futures.json")
 OPTIONS_JSON = os.path.join(DATA_DIR, "options_pc.json")
 PC_JSON      = os.path.join(DATA_DIR, "pc_ratio.json")
 
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
-    "Referer": "https://www.taifex.com.tw/cht/3/futContractsDate",
-}
+# ============================================================
 
 # ============================================================
 # 工具函式
 # ============================================================
 
-def load_json(filepath):
-    if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-        with open(filepath, "r", encoding="utf-8") as f:
-            try:
-                return json.load(f)
-            except json.JSONDecodeError:
-                return []
-    return []
-
-
-def save_json(filepath, data):
-    os.makedirs(DATA_DIR, exist_ok=True)
-    with open(filepath, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
-
-def already_exists(filepath, date_label):
-    records = load_json(filepath)
-    if isinstance(records, list):
-        return any(r.get("date") == date_label for r in records)
-    return records.get("date") == date_label
-
-
-def make_session():
-    s = requests.Session()
-    s.headers.update(HEADERS)
-    try:
-        s.get("https://www.taifex.com.tw/cht/3/futContractsDate", timeout=15)
-    except Exception:
-        pass
-    return s
+# (已搬移至 utils.py)
 
 
 def post_and_parse(session, url, payload):
@@ -405,10 +371,12 @@ if __name__ == "__main__":
     fetch_options(TODAY_QUERY, TODAY_LABEL)
     print()
     fetch_pc_ratio(TODAY_QUERY, TODAY_LABEL)
+    print()
+    options_analysis.fetch_oi_strike(TODAY_LABEL, TODAY_LABEL)
 
     print("\n=== 完成 ===")
     print(f"\n產出檔案：")
-    for f in [FUTURES_JSON, OPTIONS_JSON, PC_JSON]:
+    for f in [FUTURES_JSON, OPTIONS_JSON, PC_JSON, options_analysis.OI_STRIKE_JSON]:
         if os.path.exists(f):
             records = load_json(f)
             count = len(records) if isinstance(records, list) else 1
