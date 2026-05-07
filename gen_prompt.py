@@ -3,6 +3,7 @@
 """
 gen_prompt.py
 讀取 data/ 資料夾的所有 JSON，自動填入當日數值，產生分析 prompt
+整合了週月選分離分析、Top 10 表格、以及自動化分析訊號。
 
 用法：
   python gen_prompt.py              # 使用最新一筆資料
@@ -12,7 +13,6 @@ gen_prompt.py
 import json
 import os
 import sys
-from datetime import datetime
 
 DATA_DIR = "data"
 
@@ -40,45 +40,51 @@ def find_record(records, date_label):
 
 
 def fmt(val, unit="", decimal=0):
-    """格式化數字，加正負號"""
-    if val is None:
-        return "N/A"
+    """加正負號"""
+    if val is None: return "N/A"
     try:
         v = float(val)
-        if decimal > 0:
-            s = f"{v:+.{decimal}f}"
-        else:
-            s = f"{int(v):+,}"
+        s = f"{v:+.{decimal}f}" if decimal > 0 else f"{int(v):+}"
         return s + unit
-    except Exception:
-        return str(val)
+    except Exception: return str(val)
 
 
 def fmt_plain(val, unit="", decimal=0):
-    """格式化數字，不加正負號"""
-    if val is None:
-        return "N/A"
+    """不加正負號"""
+    if val is None: return "N/A"
     try:
         v = float(val)
-        if decimal > 0:
-            s = f"{v:.{decimal}f}"
-        else:
-            s = f"{int(v):,}"
+        s = f"{v:.{decimal}f}" if decimal > 0 else f"{int(v):,}"
         return s + unit
-    except Exception:
-        return str(val)
+    except Exception: return str(val)
+
+
+def top10_table(strikes, mode="call"):
+    """把 top10 list 格式化成文字表"""
+    if not strikes: return "    （無資料）"
+    key     = f"{mode}_oi"
+    chg_key = f"{mode}_chg"
+    # 依 OI 大小排序
+    sorted_list = sorted(strikes, key=lambda x: x.get(key, 0), reverse=True)[:10]
+    
+    lines = ["    履約價      OI     增減"]
+    for s in sorted_list:
+        oi_val  = s.get(key, 0)
+        chg_val = s.get(chg_key, 0)
+        chg_str = f"{chg_val:+,}" if chg_val is not None else "N/A"
+        lines.append(f"    {s['strike']:>7,}  {oi_val:>7,}  {chg_str:>7}")
+    return "\n".join(lines)
 
 
 # ============================================================
-# 讀取各 JSON
+# 讀取資料
 # ============================================================
 
 def load_all(date_label=None):
     futures  = find_record(load_json(os.path.join(DATA_DIR, "futures.json")),    date_label)
     options  = find_record(load_json(os.path.join(DATA_DIR, "options_pc.json")), date_label)
     pc       = find_record(load_json(os.path.join(DATA_DIR, "pc_ratio.json")),   date_label)
-    oi_list  = load_json(os.path.join(DATA_DIR, "oi_strike.json"))
-    oi       = find_record(oi_list, date_label)
+    oi       = find_record(load_json(os.path.join(DATA_DIR, "oi_strike.json")),  date_label)
     stock    = find_record(load_json(os.path.join(DATA_DIR, "stock_net.json")),  date_label)
 
     # 前一日期貨（算口數變化）
@@ -93,49 +99,62 @@ def load_all(date_label=None):
 
 
 # ============================================================
-# 產生 prompt
+# 產生 Prompt
 # ============================================================
 
 def gen_prompt(date_label=None):
     futures, options, pc, oi, stock, prev_futures = load_all(date_label)
-
-    # 日期
     report_date = (futures or options or stock or {}).get("date", date_label or "N/A")
 
-    # ── 期貨數值
-    txf         = (futures or {}).get("txf", {}) or {}
-    subtotal    = (futures or {}).get("subtotal", {}) or {}
-    net_oi      = txf.get("net_oi")
-    net_oi_amt  = txf.get("net_oi_amount")
-    sub_net_oi  = subtotal.get("net_oi")
-    sub_net_amt = subtotal.get("net_oi_amount")
+    # ── 期貨
+    txf        = (futures or {}).get("txf", {}) or {}
+    subtotal   = (futures or {}).get("subtotal", {}) or {}
+    net_oi     = txf.get("net_oi")
+    net_oi_amt = txf.get("net_oi_amount")
+    sub_net_oi = subtotal.get("net_oi")
+    sub_net_amt= subtotal.get("net_oi_amount")
+    
+    prev_txf   = (prev_futures or {}).get("txf", {}) or {}
+    net_oi_chg = (net_oi - prev_txf["net_oi"]) if net_oi is not None and prev_txf.get("net_oi") is not None else None
 
-    # 口數變化（與前日比）
-    prev_txf    = (prev_futures or {}).get("txf", {}) or {}
-    net_oi_chg  = (net_oi - prev_txf["net_oi"]) if net_oi is not None and prev_txf.get("net_oi") is not None else None
-
-    # ── 選擇權數值
+    # ── 選擇權
     net_call_oi = (options or {}).get("net_call_oi")
     net_put_oi  = (options or {}).get("net_put_oi")
     pc_oi       = (pc or {}).get("pc_oi")
 
-    # ── OI 分布
-    max_call_strike     = (oi or {}).get("max_call_strike")
-    max_put_strike      = (oi or {}).get("max_put_strike")
-    max_call_chg_strike = (oi or {}).get("max_call_chg_strike")
-    max_put_chg_strike  = (oi or {}).get("max_put_chg_strike")
+    # ── OI 週選/月選
+    weekly  = (oi or {}).get("weekly",  {}) or {}
+    monthly = (oi or {}).get("monthly", {}) or {}
+    signals = (oi or {}).get("signals", [])
 
-    # 找對應口數
-    strikes = (oi or {}).get("strikes", [])
-    def find_strike(s):
-        return next((x for x in strikes if x.get("strike") == s), {})
+    def get_oi_info(data):
+        return {
+            "expiry":    data.get("expiry_date", data.get("expiry", "N/A")),
+            "max_call":  data.get("max_call_strike"),
+            "max_call_oi": data.get("max_call_oi"),
+            "max_put":   data.get("max_put_strike"),
+            "max_put_oi":  data.get("max_put_oi"),
+            "c_range":   data.get("call_range", {}),
+            "p_range":   data.get("put_range", {}),
+            "c_conc":    data.get("call_concentration"),
+            "p_conc":    data.get("put_concentration"),
+            "c_chg_s":   data.get("max_call_chg_strike"),
+            "c_chg":     data.get("max_call_chg"),
+            "p_chg_s":   data.get("max_put_chg_strike"),
+            "p_chg":     data.get("max_put_chg"),
+            "c_dec_s":   data.get("max_call_dec_strike"),
+            "c_dec":     data.get("max_call_dec"),
+            "p_dec_s":   data.get("max_put_dec_strike"),
+            "p_dec":     data.get("max_put_dec"),
+            "top10":     data.get("top10", [])
+        }
 
-    max_call_data     = find_strike(max_call_strike)
-    max_put_data      = find_strike(max_put_strike)
-    max_call_chg_data = find_strike(max_call_chg_strike)
-    max_put_chg_data  = find_strike(max_put_chg_strike)
+    w = get_oi_info(weekly)
+    m = get_oi_info(monthly)
 
-    # ── 現貨數值
+    signal_text = "".join([f"  ⚡ {s['type']}：{s['desc']}\n" for s in signals]) if signals else "  （無異常訊號）\n"
+
+    # ── 現貨
     foreign    = (stock or {}).get("foreign")
     trust      = (stock or {}).get("trust")
     dealer     = (stock or {}).get("dealer_total")
@@ -143,7 +162,7 @@ def gen_prompt(date_label=None):
     foreign_5d = (stock or {}).get("foreign_5d")
 
     # ============================================================
-    # 組合 prompt
+    # 組合 Prompt 文字
     # ============================================================
 
     prompt = f"""你是一位台灣股市籌碼分析師，專精於期貨選擇權籌碼解讀。
@@ -155,54 +174,58 @@ def gen_prompt(date_label=None):
 - 外資淨未平倉口數：{fmt_plain(net_oi, " 口")}
 - 外資淨未平倉金額：{fmt_plain(net_oi_amt, " 千元")}
 - 期貨小計淨未平倉口數：{fmt_plain(sub_net_oi, " 口")}
-- 期貨小計淨未平倉金額：{fmt_plain(sub_net_amt, " 千元")}
-- 與前日口數變化：{fmt(net_oi_chg, " 口") if net_oi_chg is not None else "N/A（無前日資料）"}
+- 與前日口數變化：{fmt(net_oi_chg, " 口") if net_oi_chg is not None else "N/A"}
 
 ### 二、選擇權部位
 - 外資 Call 淨未平倉：{fmt(net_call_oi, " 口")}
 - 外資 Put 淨未平倉：{fmt(net_put_oi, " 口")}
 - 全市場 P/C 未平倉比率：{fmt_plain(pc_oi, "%", 2)}
 
-### 三、履約價 OI 分布（近月＋當週）
-- 最大 Call 壓力履約價：{fmt_plain(max_call_strike)}（{fmt_plain(max_call_data.get('call_oi'), ' 口')}）
-- 最大 Put 支撐履約價：{fmt_plain(max_put_strike)}（{fmt_plain(max_put_data.get('put_oi'), ' 口')}）
-- Call OI 增加最多履約價：{fmt_plain(max_call_chg_strike)}（增加 {fmt(max_call_chg_data.get('call_chg'), ' 口')}）
-- Put OI 增加最多履約價：{fmt_plain(max_put_chg_strike)}（增加 {fmt(max_put_chg_data.get('put_chg'), ' 口')}）
+### 三、【短線堡壘】週選 OI（到期：{w['expiry']}）
+- 最大 Call 壓力：{fmt_plain(w['max_call'])}（{fmt_plain(w['max_call_oi'], " 口")}，集中度 {fmt_plain(w['c_conc'], "%", 1)}）
+- 最大 Put 支撐：{fmt_plain(w['max_put'])}（{fmt_plain(w['max_put_oi'], " 口")}，集中度 {fmt_plain(w['p_conc'], "%", 1)}）
+- 壓力帶：{fmt_plain(w['c_range'].get('low'))} ～ {fmt_plain(w['c_range'].get('high'))}
+- 支撐帶：{fmt_plain(w['p_range'].get('low'))} ～ {fmt_plain(w['p_range'].get('high'))}
+- OI 加碼最多：Call {fmt_plain(w['c_chg_s'])} ({fmt(w['c_chg'])}) / Put {fmt_plain(w['p_chg_s'])} ({fmt(w['p_chg'])})
+- OI 減少最多：Call {fmt_plain(w['c_dec_s'])} ({fmt(w['c_dec'])}) / Put {fmt_plain(w['p_dec_s'])} ({fmt(w['p_dec'])})
 
-### 四、現貨三大法人買賣超
-- 外資現貨買賣超：{fmt(foreign, ' 億元', 2)}
-- 投信買賣超：{fmt(trust, ' 億元', 2)}
-- 自營商買賣超：{fmt(dealer, ' 億元', 2)}
-- 三大法人合計：{fmt(total, ' 億元', 2)}
-- 外資近5日累計買賣超：{fmt(foreign_5d, ' 億元', 2)}
+週選 Call Top10：
+{top10_table(w['top10'], 'call')}
 
-## 分析架構
+週選 Put Top10：
+{top10_table(w['top10'], 'put')}
 
-請依序輸出以下六個段落，每段2至3句：
+### 四、【戰略重鎮】月選 OI（到期：{m['expiry']}）
+- 最大 Call 壓力：{fmt_plain(m['max_call'])}（{fmt_plain(m['max_call_oi'], " 口")}，集中度 {fmt_plain(m['c_conc'], "%", 1)}）
+- 最大 Put 支撐：{fmt_plain(m['max_put'])}（{fmt_plain(m['max_put_oi'], " 口")}，集中度 {fmt_plain(m['p_conc'], "%", 1)}）
+- OI 加碼最多：Call {fmt_plain(m['c_chg_s'])} ({fmt(m['c_chg'])}) / Put {fmt_plain(m['p_chg_s'])} ({fmt(m['p_chg'])})
 
-### 1. 整體多空傾向
-綜合所有數據，用一句話判斷今日外資整體態度。
-可選擇：積極看多、偏多觀望、中立、偏空避險、積極看空。
+月選 Call Top10：
+{top10_table(m['top10'], 'call')}
 
-### 2. 期貨籌碼解讀
-說明淨未平倉口數與金額的意義，以及與前日變化代表的主力態度（加碼/減碼/方向改變）。
+月選 Put Top10：
+{top10_table(m['top10'], 'put')}
 
-### 3. 選擇權籌碼解讀
-解讀 Call/Put 淨未平倉方向，P/C 比率的市場情緒，以及最大壓力與支撐區間對近期行情的影響。
+### 五、【異常警報】交叉訊號
+{signal_text}
+### 六、現貨三大法人買賣超
+- 外資現貨買賣超：{fmt(foreign, " 億元", 2)}
+- 投信買賣超：{fmt(trust, " 億元", 2)}
+- 三大法人合計：{fmt(total, " 億元", 2)}
+- 外資近5日累計買賣超：{fmt(foreign_5d, " 億元", 2)}
 
-### 4. OI 增減主力佈局
-說明 OI 增加最多的 Call/Put 履約價代表主力在哪裡加碼，以及這對行情的暗示。
+## 分析架構（請依序輸出以下七個段落，每段2至3句）
 
-### 5. 期現貨交叉驗證
-比較現貨買賣超與期貨部位方向是否一致。若一致則強化訊號；若不一致則說明可能是避險或套利操作。
-
-### 6. 風險提示
-指出數據中的矛盾訊號、極端值、或需要謹慎解讀的地方，避免過度解讀單一指標。
+1. **整體多空傾向**：判斷外資整體態度（積極看多/偏多觀望/中立/偏空避險/積極看空）。
+2. **期貨籌碼解讀**：說明淨未平倉變化代表的主力態度。
+3. **選擇權部位解讀**：解讀 Call/Put 淨部位與 P/C 比率情緒。
+4. **短線堡壘（週選）解讀**：說明結算前支撐壓力，以及 OI 集中度代表的磁吸強度。
+5. **戰略重鎮（月選）解讀**：說明本月總體防線與中期佈局方向。
+6. **異常警報解讀**：針對交叉訊號說明短線與波段的分歧或一致性。
+7. **期現貨交叉驗證與風險提示**：比較現貨買賣超與期貨方向，並指出矛盾訊號。
 
 ## 輸出要求
-- 繁體中文
-- 重要數字與價位用**粗體**標示
-- 每段簡潔，不超過3句
+- 繁體中文，重要數字與價位用**粗體**標示。
 - 結尾單獨一行：「📊 今日信號：[積極看多／偏多觀望／中立／偏空避險／積極看空]」
 """
 
@@ -216,7 +239,6 @@ def gen_prompt(date_label=None):
 if __name__ == "__main__":
     # 可指定日期：python gen_prompt.py 2026/05/05
     target_date = sys.argv[1] if len(sys.argv) > 1 else None
-
     prompt, report_date = gen_prompt(target_date)
 
     # 印出 prompt
@@ -230,4 +252,4 @@ if __name__ == "__main__":
 
     print(f"\n{'='*50}")
     print(f"✓ prompt 已儲存至 {output_path}")
-    print(f"  直接複製貼給 Claude 或 ChatGPT 即可")
+    print(f"  直接複製貼給 AI 進行分析即可")

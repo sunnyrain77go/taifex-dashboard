@@ -87,7 +87,6 @@
       color: #94a3b8;
     }
 
-    /* 區塊標題 */
     .section-title {
       max-width: 1100px;
       margin: 0 auto 14px;
@@ -124,6 +123,109 @@
 
     .chart-card canvas {
       width: 100% !important;
+    }
+
+    /* 異常警報 */
+    .signal-alert {
+      max-width: 1100px;
+      margin: 0 auto 16px;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    .signal-alert.warn {
+      background: #2d1f0a;
+      border: 1px solid #92400e;
+      color: #fbbf24;
+    }
+
+    .signal-alert.ok {
+      background: #0a1f14;
+      border: 1px solid #065f46;
+      color: #34d399;
+    }
+
+    .signal-alert .alert-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    /* OI 週選 / 月選 兩欄 */
+    .oi-grid {
+      max-width: 1100px;
+      margin: 0 auto 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .oi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .oi-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .oi-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .oi-badge.weekly {
+      background: #1e3a5f;
+      color: #60a5fa;
+      border: 1px solid #2d5a8e;
+    }
+
+    .oi-badge.monthly {
+      background: #1a3a2a;
+      color: #34d399;
+      border: 1px solid #2d6b4a;
+    }
+
+    .oi-expiry {
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+
+    .oi-summary-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .oi-summary-item {
+      text-align: center;
+    }
+
+    .oi-summary-label {
+      font-size: 0.68rem;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .oi-summary-value {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .oi-summary-sub {
+      font-size: 0.68rem;
+      color: #475569;
+      margin-top: 2px;
     }
 
     .error-msg {
@@ -190,11 +292,6 @@
       <div class="sub" id="sig-sub-oi-sub">口</div>
     </div>
     <div class="signal-card">
-      <div class="label">期貨小計 淨未平倉金額</div>
-      <div class="value" id="sig-sub-amt">—</div>
-      <div class="sub" id="sig-sub-amt-sub">千元</div>
-    </div>
-    <div class="signal-card">
       <div class="label">外資 Call 淨未平倉</div>
       <div class="value" id="sig-call-oi">—</div>
       <div class="sub" id="sig-call-oi-sub">正＝淨買Call看多</div>
@@ -245,61 +342,87 @@
     </div>
   </div>
 
-  <!-- OI 分布圖表 -->
-  <div class="section-title" style="margin-top:8px;">▍履約價 OI 分布（近月＋當週）</div>
+  <!-- OI 分布 -->
+  <div class="section-title" style="margin-top:8px;">▍履約價 OI 分布</div>
 
-  <!-- 訊號卡片：支撐壓力 -->
-  <div class="signal-row" style="margin-bottom:14px;">
-    <div class="signal-card">
-      <div class="label">最大 Call 壓力履約價</div>
-      <div class="value bear" id="sig-max-call">—</div>
-      <div class="sub" id="sig-max-call-sub">口</div>
-    </div>
-    <div class="signal-card">
-      <div class="label">最大 Put 支撐履約價</div>
-      <div class="value bull" id="sig-max-put">—</div>
-      <div class="sub" id="sig-max-put-sub">口</div>
-    </div>
-    <div class="signal-card">
-      <div class="label">Call 加碼最多履約價</div>
-      <div class="value bear" id="sig-max-call-chg">—</div>
-      <div class="sub" id="sig-max-call-chg-sub">口增加</div>
-    </div>
-    <div class="signal-card">
-      <div class="label">Put 加碼最多履約價</div>
-      <div class="value bull" id="sig-max-put-chg">—</div>
-      <div class="sub" id="sig-max-put-chg-sub">口增加</div>
-    </div>
-  </div>
+  <!-- 異常警報 -->
+  <div class="signal-alert" id="signal-alert"></div>
 
-  <div class="charts">
+  <!-- 週選堡壘 / 月選重鎮 兩欄 -->
+  <div class="oi-grid">
+
     <div class="chart-card">
-      <h2>🏔 Call / Put OI 分布（橫軸＝履約價）</h2>
-      <div style="font-size:0.78rem;color:#64748b;margin-bottom:12px;">
-        ▲ 紅線＝最大Call壓力　▲ 綠線＝最大Put支撐
+      <div class="oi-header">
+        <span class="oi-badge weekly">🏰 週選堡壘</span>
+        <span class="oi-expiry" id="w-expiry">結算日：—</span>
       </div>
-      <canvas id="chart-oi-dist" height="130"></canvas>
+      <div class="oi-summary-row">
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">最大 Call 壓力</div>
+          <div class="oi-summary-value bear" id="w-max-call">—</div>
+          <div class="oi-summary-sub" id="w-max-call-sub"></div>
+        </div>
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">最大 Put 支撐</div>
+          <div class="oi-summary-value bull" id="w-max-put">—</div>
+          <div class="oi-summary-sub" id="w-max-put-sub"></div>
+        </div>
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">壓力帶</div>
+          <div class="oi-summary-value neut" id="w-call-range">—</div>
+        </div>
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">支撐帶</div>
+          <div class="oi-summary-value neut" id="w-put-range">—</div>
+        </div>
+      </div>
+      <canvas id="chart-w-oi" height="120"></canvas>
+      <div style="font-size:0.72rem;color:#475569;margin:8px 0 4px;">OI 增減（與前日）</div>
+      <canvas id="chart-w-chg" height="70"></canvas>
     </div>
+
     <div class="chart-card">
-      <h2>📈 Call / Put OI 增減（與前日比較）</h2>
-      <div style="font-size:0.78rem;color:#64748b;margin-bottom:12px;">
-        正值＝OI增加（主力加碼）　負值＝OI減少（平倉）
+      <div class="oi-header">
+        <span class="oi-badge monthly">🏯 月選重鎮</span>
+        <span class="oi-expiry" id="m-expiry">到期月份：—</span>
       </div>
-      <canvas id="chart-oi-chg" height="130"></canvas>
+      <div class="oi-summary-row">
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">最大 Call 壓力</div>
+          <div class="oi-summary-value bear" id="m-max-call">—</div>
+          <div class="oi-summary-sub" id="m-max-call-sub"></div>
+        </div>
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">最大 Put 支撐</div>
+          <div class="oi-summary-value bull" id="m-max-put">—</div>
+          <div class="oi-summary-sub" id="m-max-put-sub"></div>
+        </div>
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">壓力帶</div>
+          <div class="oi-summary-value neut" id="m-call-range">—</div>
+        </div>
+        <div class="oi-summary-item">
+          <div class="oi-summary-label">支撐帶</div>
+          <div class="oi-summary-value neut" id="m-put-range">—</div>
+        </div>
+      </div>
+      <canvas id="chart-m-oi" height="120"></canvas>
+      <div style="font-size:0.72rem;color:#475569;margin:8px 0 4px;">OI 增減（與前日）</div>
+      <canvas id="chart-m-chg" height="70"></canvas>
     </div>
+
   </div>
 
   <!-- 說明 -->
   <div class="legend-box">
     <h3>判讀說明</h3>
     <span class="bull">紅色＝多方訊號</span>，<span class="bear">綠色＝空方訊號</span>。<br>
-    期貨淨未平倉口數：正值代表外資淨多單，負值代表淨空單；持續增加代表方向性加碼。<br>
-    期貨淨未平倉金額：與口數搭配看，金額大代表押注部位重。<br>
-    Call 淨未平倉：正值代表外資買 Call 多於賣 Call，看漲傾向。<br>
-    Put 淨未平倉：負值代表外資賣 Put 多於買 Put，願意在低點承接，偏多訊號。<br>
+    期貨淨未平倉：正值＝外資淨多單，負值＝淨空單；持續增加代表方向性加碼。<br>
+    Call 淨未平倉：正值＝外資淨買Call（看漲）；Put 淨未平倉：負值＝外資淨賣Put（偏多）。<br>
     P/C 比率：低於 80% 偏多，高於 120% 偏空；極端值可能是逆向指標。<br>
-    最大 Call 壓力履約價：主力賣 Call 集中處，指數不易突破；最大 Put 支撐履約價：主力賣 Put 集中處，指數不易跌破。<br>
-    OI 增減：某履約價 OI 大幅增加，代表主力在該價位加碼佈局，需留意方向；OI 減少代表部位平倉，重要性下降。
+    週選堡壘：下次結算前的支撐壓力區間，OI 集中度越高磁吸效應越強。<br>
+    月選重鎮：本月總體多空防線，OI 往上移代表市場預期走高，往下移代表走弱。<br>
+    異常警報：週選 vs 月選的壓力/支撐位置出現分歧時，代表短線與波段方向不同，操作需更謹慎。
   </div>
 
   <script>
@@ -309,18 +432,20 @@
       responsive: true,
       interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: { labels: { color: '#94a3b8', font: { size: 12 } } },
+        legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
         tooltip: { backgroundColor: '#1e2333', borderColor: '#2d3748', borderWidth: 1 }
       },
       scales: {
-        x: {
-          ticks: { color: '#64748b', maxRotation: 45, font: { size: 11 } },
-          grid: { color: '#1e293b' }
-        },
-        y: {
-          ticks: { color: '#64748b', font: { size: 11 } },
-          grid: { color: '#1e293b' }
-        }
+        x: { ticks: { color: '#64748b', maxRotation: 45, font: { size: 10 } }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: '#1e293b' } }
+      }
+    };
+
+    const OI_X_OPTS = {
+      ...CHART_DEFAULTS,
+      scales: {
+        x: { ticks: { color: '#64748b', maxRotation: 60, font: { size: 9 } }, grid: { color: '#1e293b' } },
+        y: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } }
       }
     };
 
@@ -346,18 +471,12 @@
       return resp.json();
     }
 
-    function makeBarChart(canvasId, labels, data) {
+    function makeBarChart(canvasId, labels, data, legend = false) {
       const colors = data.map(v => v >= 0 ? 'rgba(248,113,113,0.85)' : 'rgba(52,211,153,0.85)');
       return new Chart(document.getElementById(canvasId), {
         type: 'bar',
-        data: {
-          labels,
-          datasets: [{ data, backgroundColor: colors, borderRadius: 3 }]
-        },
-        options: {
-          ...CHART_DEFAULTS,
-          plugins: { ...CHART_DEFAULTS.plugins, legend: { display: false } }
-        }
+        data: { labels, datasets: [{ data, backgroundColor: colors, borderRadius: 3 }] },
+        options: { ...CHART_DEFAULTS, plugins: { ...CHART_DEFAULTS.plugins, legend: { display: legend } } }
       });
     }
 
@@ -365,17 +484,109 @@
       return new Chart(document.getElementById(canvasId), {
         type: 'line',
         data: { labels, datasets },
-        options: {
-          ...CHART_DEFAULTS,
-          elements: { point: { radius: 2, hoverRadius: 5 } }
-        }
+        options: { ...CHART_DEFAULTS, elements: { point: { radius: 2, hoverRadius: 5 } } }
       });
     }
 
     function showError(canvasId, msg) {
-      document.getElementById(canvasId).insertAdjacentHTML(
-        'afterend', `<div class="error-msg">⚠️ ${msg}</div>`
-      );
+      const el = document.getElementById(canvasId);
+      if (el) el.insertAdjacentHTML('afterend', `<div class="error-msg">⚠️ ${msg}</div>`);
+    }
+
+    // 畫 OI 分布長條圖（Call紅 Put綠）+ 壓力支撐垂直線
+    function makeOIChart(canvasId, top10, maxCallStrike, maxPutStrike) {
+      const sorted = [...top10].sort((a, b) => a.strike - b.strike);
+      const labels = sorted.map(s => s.strike.toLocaleString());
+      const callOI = sorted.map(s => s.call_oi ?? 0);
+      const putOI = sorted.map(s => s.put_oi ?? 0);
+      const maxCIdx = sorted.findIndex(s => s.strike === maxCallStrike);
+      const maxPIdx = sorted.findIndex(s => s.strike === maxPutStrike);
+
+      const vline = {
+        id: 'vline',
+        afterDraw(chart) {
+          const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+          [[maxCIdx, '#f87171'], [maxPIdx, '#34d399']].forEach(([idx, color]) => {
+            if (idx < 0) return;
+            const xPos = x.getPixelForValue(idx);
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(xPos, top);
+            ctx.lineTo(xPos, bottom);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = color;
+            ctx.setLineDash([4, 3]);
+            ctx.stroke();
+            ctx.restore();
+          });
+        }
+      };
+
+      return new Chart(document.getElementById(canvasId), {
+        type: 'bar',
+        plugins: [vline],
+        data: {
+          labels,
+          datasets: [
+            { label: 'Call OI', data: callOI, backgroundColor: 'rgba(248,113,113,0.75)', borderRadius: 2 },
+            { label: 'Put OI', data: putOI, backgroundColor: 'rgba(52,211,153,0.75)', borderRadius: 2 },
+          ]
+        },
+        options: OI_X_OPTS
+      });
+    }
+
+    // 畫 OI 增減長條圖
+    function makeChgChart(canvasId, top10) {
+      const sorted = [...top10].sort((a, b) => a.strike - b.strike);
+      const labels = sorted.map(s => s.strike.toLocaleString());
+      const callChgs = sorted.map(s => s.call_chg ?? 0);
+      const putChgs = sorted.map(s => s.put_chg ?? 0);
+
+      return new Chart(document.getElementById(canvasId), {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Call 增減',
+              data: callChgs,
+              backgroundColor: callChgs.map(v => v >= 0 ? 'rgba(248,113,113,0.75)' : 'rgba(248,113,113,0.3)'),
+              borderRadius: 2,
+            },
+            {
+              label: 'Put 增減',
+              data: putChgs,
+              backgroundColor: putChgs.map(v => v >= 0 ? 'rgba(52,211,153,0.75)' : 'rgba(52,211,153,0.3)'),
+              borderRadius: 2,
+            }
+          ]
+        },
+        options: OI_X_OPTS
+      });
+    }
+
+    // 設定 OI 摘要欄
+    function setOISummary(prefix, data) {
+      const cr = data.call_range || {};
+      const pr = data.put_range || {};
+      const maxCall = data.max_call_strike;
+      const maxPut = data.max_put_strike;
+      const callConc = data.call_concentration;
+      const putConc = data.put_concentration;
+
+      document.getElementById(`${prefix}-max-call`).textContent =
+        maxCall ? maxCall.toLocaleString() : '—';
+      document.getElementById(`${prefix}-max-call-sub`).textContent =
+        data.max_call_oi ? `${data.max_call_oi.toLocaleString()} 口　集中度 ${callConc ?? '—'}%` : '';
+      document.getElementById(`${prefix}-max-put`).textContent =
+        maxPut ? maxPut.toLocaleString() : '—';
+      document.getElementById(`${prefix}-max-put-sub`).textContent =
+        data.max_put_oi ? `${data.max_put_oi.toLocaleString()} 口　集中度 ${putConc ?? '—'}%` : '';
+      document.getElementById(`${prefix}-call-range`).textContent =
+        cr.low && cr.high ? `${cr.low.toLocaleString()}～${cr.high.toLocaleString()}` : '—';
+      document.getElementById(`${prefix}-put-range`).textContent =
+        pr.low && pr.high ? `${pr.low.toLocaleString()}～${pr.high.toLocaleString()}` : '—';
     }
 
     async function init() {
@@ -392,7 +603,6 @@
         const subOI = futures.map(d => d.subtotal?.net_oi ?? 0);
         const subAmt = futures.map(d => d.subtotal?.net_oi_amount ?? 0);
 
-        // 訊號卡片
         const lat = futures.at(-1);
         if (lat) {
           const txfDir = lat.txf?.net_oi > 0 ? '淨多' : (lat.txf?.net_oi < 0 ? '淨空' : '持平');
@@ -400,7 +610,6 @@
           setSignal('sig-txf-oi', lat.txf?.net_oi, 'sig-txf-oi-sub', `口（${txfDir}）`);
           setSignal('sig-txf-amt', lat.txf?.net_oi_amount, 'sig-txf-amt-sub', '千元');
           setSignal('sig-sub-oi', lat.subtotal?.net_oi, 'sig-sub-oi-sub', `口（${subDir}）`);
-          setSignal('sig-sub-amt', lat.subtotal?.net_oi_amount, 'sig-sub-amt-sub', '千元');
         }
 
         makeBarChart('chart-txf-oi', labels, txfOI);
@@ -409,8 +618,7 @@
         makeBarChart('chart-sub-amt', labels, subAmt);
 
       } catch (e) {
-        ['chart-txf-oi', 'chart-txf-amt', 'chart-sub-oi', 'chart-sub-amt']
-          .forEach(id => showError(id, e.message));
+        ['chart-txf-oi', 'chart-txf-amt', 'chart-sub-oi', 'chart-sub-amt'].forEach(id => showError(id, e.message));
       }
 
       // ── 選擇權
@@ -427,25 +635,11 @@
         }
 
         makeLineChart('chart-options', labels, [
-          {
-            label: 'Call 淨未平倉',
-            data: callOI,
-            borderColor: '#f87171',
-            backgroundColor: 'rgba(248,113,113,0.1)',
-            fill: true, tension: 0.3,
-          },
-          {
-            label: 'Put 淨未平倉',
-            data: putOI,
-            borderColor: '#34d399',
-            backgroundColor: 'rgba(52,211,153,0.1)',
-            fill: true, tension: 0.3,
-          }
+          { label: 'Call 淨未平倉', data: callOI, borderColor: '#f87171', backgroundColor: 'rgba(248,113,113,0.1)', fill: true, tension: 0.3 },
+          { label: 'Put 淨未平倉', data: putOI, borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.1)', fill: true, tension: 0.3 },
         ]);
 
-      } catch (e) {
-        showError('chart-options', e.message);
-      }
+      } catch (e) { showError('chart-options', e.message); }
 
       // ── P/C Ratio
       try {
@@ -457,179 +651,58 @@
         if (lat) {
           const sentiment = lat.pc_oi > 120 ? '偏空' : (lat.pc_oi < 80 ? '偏多' : '中立');
           document.getElementById('sig-pc').textContent = lat.pc_oi?.toFixed(2) ?? '—';
-          document.getElementById('sig-pc').className =
-            'value ' + (lat.pc_oi > 120 ? 'bear' : (lat.pc_oi < 80 ? 'bull' : 'neut'));
+          document.getElementById('sig-pc').className = 'value ' + (lat.pc_oi > 120 ? 'bear' : (lat.pc_oi < 80 ? 'bull' : 'neut'));
           document.getElementById('sig-pc-sub').textContent = `%（${sentiment}）`;
         }
 
         makeLineChart('chart-pc', labels, [
-          {
-            label: 'P/C 未平倉比率 %',
-            data: pcOI,
-            borderColor: '#818cf8',
-            backgroundColor: 'rgba(129,140,248,0.1)',
-            fill: true, tension: 0.3, pointRadius: 2,
-          }
+          { label: 'P/C 未平倉比率 %', data: pcOI, borderColor: '#818cf8', backgroundColor: 'rgba(129,140,248,0.1)', fill: true, tension: 0.3, pointRadius: 2 }
         ]);
 
-      } catch (e) {
-        showError('chart-pc', e.message);
-      }
+      } catch (e) { showError('chart-pc', e.message); }
 
       document.getElementById('last-updated').textContent = `最後更新：${lastDate}`;
 
-      // ── OI 分布
+      // ── OI 週選 / 月選
       try {
-        const oiData = await fetchJSON(BASE + 'data/oi_strike.json');
-        const latest = Array.isArray(oiData) ? oiData.at(-1) : oiData;
-        if (!latest || !latest.strikes) throw new Error('oi_strike.json 無資料');
+        const oiList = await fetchJSON(BASE + 'data/oi_strike.json');
+        const latest = Array.isArray(oiList) ? oiList.at(-1) : oiList;
+        if (!latest) throw new Error('oi_strike.json 無資料');
 
-        const strikes = latest.strikes;
+        const weekly = latest.weekly || {};
+        const monthly = latest.monthly || {};
+        const signals = latest.signals || [];
 
-        // 訊號卡片
-        const maxCallStrike = latest.max_call_strike;
-        const maxPutStrike = latest.max_put_strike;
-        const maxCallChgStrike = latest.max_call_chg_strike;
-        const maxPutChgStrike = latest.max_put_chg_strike;
-
-        const maxCallOI = strikes.find(s => s.strike === maxCallStrike);
-        const maxPutOI = strikes.find(s => s.strike === maxPutStrike);
-        const maxCallChg = strikes.find(s => s.strike === maxCallChgStrike);
-        const maxPutChg = strikes.find(s => s.strike === maxPutChgStrike);
-
-        document.getElementById('sig-max-call').textContent = maxCallStrike?.toLocaleString() ?? '—';
-        document.getElementById('sig-max-call-sub').textContent = maxCallOI ? `${maxCallOI.call_oi.toLocaleString()} 口` : '';
-        document.getElementById('sig-max-put').textContent = maxPutStrike?.toLocaleString() ?? '—';
-        document.getElementById('sig-max-put-sub').textContent = maxPutOI ? `${maxPutOI.put_oi.toLocaleString()} 口` : '';
-
-        if (maxCallChg) {
-          document.getElementById('sig-max-call-chg').textContent = maxCallChgStrike?.toLocaleString() ?? '—';
-          document.getElementById('sig-max-call-chg-sub').textContent = `+${maxCallChg.call_chg?.toLocaleString()} 口增加`;
-        }
-        if (maxPutChg) {
-          document.getElementById('sig-max-put-chg').textContent = maxPutChgStrike?.toLocaleString() ?? '—';
-          document.getElementById('sig-max-put-chg-sub').textContent = `+${maxPutChg.put_chg?.toLocaleString()} 口增加`;
+        // 異常警報
+        const alertEl = document.getElementById('signal-alert');
+        if (signals.length > 0) {
+          const isWarn = signals.some(s => ['短空長多', '短多長空', '結算磁吸'].includes(s.type));
+          alertEl.className = `signal-alert ${isWarn ? 'warn' : 'ok'}`;
+          alertEl.style.display = 'block';
+          alertEl.innerHTML = `<div class="alert-title">⚡ 異常警報</div>` +
+            signals.map(s => `<div><strong>${s.type}</strong>：${s.desc}</div>`).join('');
         }
 
-        // 圖表資料
-        const labels = strikes.map(s => s.strike.toLocaleString());
-        const callOIs = strikes.map(s => s.call_oi);
-        const putOIs = strikes.map(s => s.put_oi);
-        const callChgs = strikes.map(s => s.call_chg ?? 0);
-        const putChgs = strikes.map(s => s.put_chg ?? 0);
+        // 週選
+        document.getElementById('w-expiry').textContent =
+          `結算日：${weekly.expiry_date ?? weekly.expiry ?? '—'}`;
+        setOISummary('w', weekly);
+        if (weekly.top10?.length) {
+          makeOIChart('chart-w-oi', weekly.top10, weekly.max_call_strike, weekly.max_put_strike);
+          makeChgChart('chart-w-chg', weekly.top10);
+        }
 
-        // 最大壓力/支撐的 index（畫垂直標示線用）
-        const maxCallIdx = strikes.findIndex(s => s.strike === maxCallStrike);
-        const maxPutIdx = strikes.findIndex(s => s.strike === maxPutStrike);
-
-        // ── 圖1：OI 分布長條圖
-        const pluginVline = {
-          id: 'vline',
-          afterDraw(chart) {
-            const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
-            [[maxCallIdx, '#f87171'], [maxPutIdx, '#34d399']].forEach(([idx, color]) => {
-              if (idx < 0) return;
-              const xPos = x.getPixelForValue(idx);
-              ctx.save();
-              ctx.beginPath();
-              ctx.moveTo(xPos, top);
-              ctx.lineTo(xPos, bottom);
-              ctx.lineWidth = 2;
-              ctx.strokeStyle = color;
-              ctx.setLineDash([4, 3]);
-              ctx.stroke();
-              ctx.restore();
-            });
-          }
-        };
-
-        new Chart(document.getElementById('chart-oi-dist'), {
-          type: 'bar',
-          plugins: [pluginVline],
-          data: {
-            labels,
-            datasets: [
-              {
-                label: 'Call OI',
-                data: callOIs,
-                backgroundColor: 'rgba(248,113,113,0.75)',
-                borderRadius: 2,
-              },
-              {
-                label: 'Put OI',
-                data: putOIs,
-                backgroundColor: 'rgba(52,211,153,0.75)',
-                borderRadius: 2,
-              }
-            ]
-          },
-          options: {
-            ...CHART_DEFAULTS,
-            scales: {
-              x: {
-                ticks: {
-                  color: '#64748b',
-                  font: { size: 10 },
-                  maxRotation: 90,
-                  // 只顯示部分 label 避免擁擠
-                  callback(val, idx) {
-                    return idx % 3 === 0 ? this.getLabelForValue(val) : '';
-                  }
-                },
-                grid: { color: '#1e293b' }
-              },
-              y: {
-                ticks: { color: '#64748b', font: { size: 11 } },
-                grid: { color: '#1e293b' }
-              }
-            }
-          }
-        });
-
-        // ── 圖2：OI 增減長條圖
-        new Chart(document.getElementById('chart-oi-chg'), {
-          type: 'bar',
-          data: {
-            labels,
-            datasets: [
-              {
-                label: 'Call OI 增減',
-                data: callChgs,
-                backgroundColor: callChgs.map(v => v >= 0 ? 'rgba(248,113,113,0.75)' : 'rgba(248,113,113,0.3)'),
-                borderRadius: 2,
-              },
-              {
-                label: 'Put OI 增減',
-                data: putChgs,
-                backgroundColor: putChgs.map(v => v >= 0 ? 'rgba(52,211,153,0.75)' : 'rgba(52,211,153,0.3)'),
-                borderRadius: 2,
-              }
-            ]
-          },
-          options: {
-            ...CHART_DEFAULTS,
-            scales: {
-              x: {
-                ticks: {
-                  color: '#64748b',
-                  font: { size: 10 },
-                  maxRotation: 90,
-                  callback(val, idx) {
-                    return idx % 3 === 0 ? this.getLabelForValue(val) : '';
-                  }
-                },
-                grid: { color: '#1e293b' }
-              },
-              y: {
-                ticks: { color: '#64748b', font: { size: 11 } },
-                grid: { color: '#1e293b' }
-              }
-            }
-          }
-        });
+        // 月選
+        document.getElementById('m-expiry').textContent =
+          `到期月份：${monthly.expiry ?? '—'}`;
+        setOISummary('m', monthly);
+        if (monthly.top10?.length) {
+          makeOIChart('chart-m-oi', monthly.top10, monthly.max_call_strike, monthly.max_put_strike);
+          makeChgChart('chart-m-chg', monthly.top10);
+        }
 
       } catch (e) {
-        ['chart-oi-dist', 'chart-oi-chg'].forEach(id => showError(id, e.message));
+        ['chart-w-oi', 'chart-w-chg', 'chart-m-oi', 'chart-m-chg'].forEach(id => showError(id, e.message));
       }
     }
 
