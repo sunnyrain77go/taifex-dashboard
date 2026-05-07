@@ -58,38 +58,36 @@ def fetch_oi_strike(query_date, label_date):
     df["到期月份_clean"] = df["到期月份(週別)"].astype(str).str.strip()
 
     # --- 合約辨識邏輯 ---
-    # 找近月代碼
-    year_month = label_date[:7].replace("/", "")   # "202605"
-    near_month = year_month                         # 月選格式："202605"
-    week1       = year_month + "W1"                  # 週選："202605W1"
-    
-    # 找當週是哪個週別（可能不是W1）
-    # 取所有本月週選，找到期日最近的那個
-    this_month_weeks = df[
-        df["到期月份_clean"].str.startswith(year_month + "W")
-    ]["到期月份_clean"].unique()
-
-    # 找最近到期的週選（契約到期日最小且>=今天）
+    # 找所有合約的到期日
     from datetime import datetime as dt
     query_dt = dt.strptime(query_date, "%Y-%m-%d") if "-" in query_date else dt.strptime(query_date, "%Y/%m/%d")
-    nearest_week = None
-    nearest_expiry = None
-
-    for w in this_month_weeks:
+    
+    unique_contracts = df["到期月份_clean"].unique()
+    contract_expiry = {}
+    for c in unique_contracts:
         # 取該週別的契約到期日
-        expiry_vals = df[df["到期月份_clean"] == w]["契約到期日"].dropna().unique()
-        for ev in expiry_vals:
+        exp_vals = df[df["到期月份_clean"] == c]["契約到期日"].dropna().unique()
+        if len(exp_vals) > 0:
             try:
-                exp_dt = dt.strptime(str(int(ev)), "%Y%m%d")
-                if exp_dt >= query_dt:
-                    if nearest_expiry is None or exp_dt < nearest_expiry:
-                        nearest_expiry = exp_dt
-                        nearest_week = w
+                # 轉成 datetime 方便比較
+                exp_dt = dt.strptime(str(int(exp_vals[0])), "%Y%m%d")
+                contract_expiry[c] = exp_dt
             except Exception:
                 continue
 
-    if nearest_week is None:
-        nearest_week = week1   # fallback
+    # 1. 找最近到期的週選 (代碼含 W 且 到期日 >= 查詢日)
+    weeklies = [c for c in contract_expiry if "W" in c and contract_expiry[c] >= query_dt]
+    nearest_week = None
+    nearest_expiry = None
+    if weeklies:
+        nearest_week = min(weeklies, key=lambda x: contract_expiry[x])
+        nearest_expiry = contract_expiry[nearest_week]
+
+    # 2. 找最近到期的月選 (代碼為 6 位純數字 且 到期日 >= 查詢日)
+    monthlies = [c for c in contract_expiry if len(c) == 6 and c.isdigit() and contract_expiry[c] >= query_dt]
+    near_month = None
+    if monthlies:
+        near_month = min(monthlies, key=lambda x: contract_expiry[x])
 
     print(f"  週選合約：{nearest_week}（到期：{nearest_expiry.strftime('%Y/%m/%d') if nearest_expiry else 'N/A'}）")
     print(f"  月選合約：{near_month}")
@@ -323,7 +321,6 @@ def fetch_oi_strike(query_date, label_date):
     print(f"  [OK] 寫入成功：週選 {len(week_strikes)} 個履約價，月選 {len(month_strikes)} 個履約價")
 
 if __name__ == "__main__":
-    # 測試執行
-    import datetime
-    target = "2026/05/06"
+    # 直接指定日期
+    target = "2026/04/27"
     fetch_oi_strike(target, target)
