@@ -29,9 +29,25 @@ from fetch_stock_net import fetch_stock_net, STOCK_NET_JSON
 # 設定（在 Colab 測試時修改這裡的日期）
 # ============================================================
 
-# 正式跑當天資料時用這兩行：
+# 預設日期（跑當天）
 TODAY_QUERY = datetime.now().strftime("%Y-%m-%d")
 TODAY_LABEL = datetime.now().strftime("%Y/%m/%d")
+
+# 如果執行時有帶參數 (例如 python fetch_taifex.py 2026/05/07)
+if len(sys.argv) > 1:
+    try:
+        target_dt = datetime.strptime(sys.argv[1], "%Y/%m/%d")
+        TODAY_QUERY = target_dt.strftime("%Y-%m-%d")
+        TODAY_LABEL = target_dt.strftime("%Y/%m/%d")
+        print(f"  [手動指定日期] {TODAY_LABEL}")
+    except ValueError:
+        print("  [錯誤] 日期格式錯誤，請使用 YYYY/MM/DD (例如 2026/05/07)")
+        sys.exit(1)
+else:
+    # 沒帶參數時，若想固定跑某一天，可以在這裡手動改
+    # TODAY_QUERY = "2026-05-07"
+    # TODAY_LABEL = "2026/05/07"
+    pass
 
 FUTURES_JSON = os.path.join(DATA_DIR, "futures.json")
 OPTIONS_JSON = os.path.join(DATA_DIR, "options_pc.json")
@@ -82,7 +98,7 @@ def fetch_futures(query_date, label_date):
 
     if already_exists(FUTURES_JSON, label_date):
         print(f"  今日資料已存在，跳過（{label_date}）")
-        return
+        return False
 
     session = make_session()
     tables = post_and_parse(session,
@@ -96,7 +112,7 @@ def fetch_futures(query_date, label_date):
         }
     )
     if tables is None:
-        return
+        return False
 
     df = flatten_cols(tables[0])
 
@@ -117,7 +133,7 @@ def fetch_futures(query_date, label_date):
     subtotal = extract_row("期貨 小計")
 
     if txf is None and subtotal is None:
-        return
+        return False
 
     def build_record(v):
         if v is None:
@@ -153,6 +169,8 @@ def fetch_futures(query_date, label_date):
         amt = record["subtotal"]["net_oi_amount"]
         direction = "淨多" if net > 0 else ("淨空" if net < 0 else "持平")
         print(f"  ✓ 期貨小計：淨未平倉 = {net:+,} 口（{direction}），{amt:,} 千元")
+    
+    return True
 
 
 # ============================================================
@@ -181,7 +199,7 @@ def fetch_options(query_date, label_date):
 
     if already_exists(OPTIONS_JSON, label_date):
         print(f"  今日資料已存在，跳過（{label_date}）")
-        return
+        return False
 
     session = make_session()
     tables = post_and_parse(session,
@@ -193,7 +211,7 @@ def fetch_options(query_date, label_date):
         }
     )
     if tables is None:
-        return
+        return False
 
     df = flatten_cols(tables[0])
 
@@ -208,7 +226,7 @@ def fetch_options(query_date, label_date):
     if len(rows) < 2:
         print(f"  [警告] 找到 {len(rows)} 列，預期 2 列（買權＋賣權）")
         print(rows.to_string())
-        return
+        return False
 
     call_row = None
     put_row  = None
@@ -222,7 +240,7 @@ def fetch_options(query_date, label_date):
 
     if call_row is None or put_row is None:
         print("  [警告] 無法區分買權/賣權列")
-        return
+        return False
 
     # 欄位對應（已確認）：
     # [04] 買方交易口數  [06] 賣方交易口數  [08] 買賣差額交易口數
@@ -252,6 +270,7 @@ def fetch_options(query_date, label_date):
     print(f"  ✓ 寫入成功")
     print(f"    外資 Call 淨未平倉 = {record['net_call_oi']:+,}（{call_dir}）")
     print(f"    外資 Put  淨未平倉 = {record['net_put_oi']:+,}（{put_dir}）")
+    return True
 
 
 # ============================================================
@@ -269,7 +288,7 @@ def fetch_pc_ratio(query_date, label_date):
 
     if already_exists(PC_JSON, label_date):
         print(f"  今日資料已存在，跳過（{label_date}）")
-        return
+        return False
 
     session = make_session()
     try:
@@ -281,11 +300,11 @@ def fetch_pc_ratio(query_date, label_date):
         tables = pd.read_html(StringIO(resp.text))
     except Exception as e:
         print(f"  [錯誤] {e}")
-        return
+        return False
 
     if not tables:
         print("  [警告] 無資料")
-        return
+        return False
 
     df = tables[0]
 
@@ -305,8 +324,7 @@ def fetch_pc_ratio(query_date, label_date):
 
     if today_row is None:
         print(f"  [警告] 找不到 {label_date} 的資料（pcRatio 只保留最近20個交易日）")
-        today_row = df.iloc[0]
-        print(f"  [提示] 以最新一筆資料代替：{today_row.iloc[0]}")
+        return False
 
     put_vol  = safe_int(today_row.iloc[1])
     call_vol = safe_int(today_row.iloc[2])
@@ -331,6 +349,7 @@ def fetch_pc_ratio(query_date, label_date):
 
     sentiment = "偏空" if pc_oi and pc_oi > 120 else ("偏多" if pc_oi and pc_oi < 80 else "中立")
     print(f"  ✓ 寫入成功：P/C未平倉比率 = {pc_oi}%（{sentiment}）")
+    return True
 
 
 # ============================================================
@@ -346,22 +365,24 @@ if __name__ == "__main__":
 
     os.makedirs(DATA_DIR, exist_ok=True)
 
-    fetch_futures(TODAY_QUERY, TODAY_LABEL)
-    print()
-    fetch_options(TODAY_QUERY, TODAY_LABEL)
-    print()
-    fetch_pc_ratio(TODAY_QUERY, TODAY_LABEL)
-    print()
-    options_analysis.fetch_oi_strike(TODAY_LABEL, TODAY_LABEL)
-    print()
-    print()
-    fetch_stock_net(TODAY_QUERY.replace("-", ""), TODAY_LABEL)
-    print()
+    # 執行各個模組並記錄成功狀態
+    success_map = {
+        FUTURES_JSON: fetch_futures(TODAY_QUERY, TODAY_LABEL),
+        OPTIONS_JSON: fetch_options(TODAY_QUERY, TODAY_LABEL),
+        PC_JSON:      fetch_pc_ratio(TODAY_QUERY, TODAY_LABEL),
+        options_analysis.OI_STRIKE_JSON: options_analysis.fetch_oi_strike(TODAY_LABEL, TODAY_LABEL),
+        STOCK_NET_JSON: fetch_stock_net(TODAY_QUERY.replace("-", ""), TODAY_LABEL),
+    }
 
     print("\n=== 完成 ===")
-    print(f"\n產出檔案：")
-    for f in [FUTURES_JSON, OPTIONS_JSON, PC_JSON, options_analysis.OI_STRIKE_JSON, STOCK_NET_JSON]:
-        if os.path.exists(f):
+    
+    # 只顯示今日有更新的檔案
+    updated_files = [f for f, success in success_map.items() if success]
+    if updated_files:
+        print(f"\n今日更新檔案：")
+        for f in updated_files:
             records = load_json(f)
             count = len(records) if isinstance(records, list) else 1
             print(f"  {f}（{count} 筆）")
+    else:
+        print("\n今日無資料更新。")

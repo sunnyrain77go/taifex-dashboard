@@ -165,6 +165,10 @@ def fetch_oi_strike(query_date, label_date):
     week_strikes,  w_total_call, w_total_put  = build_strikes(week_map,  prev_week_map)
     month_strikes, m_total_call, m_total_put  = build_strikes(month_map, prev_month_map)
 
+    if not week_strikes and not month_strikes:
+        print(f"  [警告] 找不到 {label_date} 的週選與月選資料，跳過儲存。")
+        return
+
     # ── 分析函式
     def analyze(strikes, total_call, total_put, label):
         if not strikes:
@@ -319,6 +323,7 @@ def fetch_oi_strike(query_date, label_date):
         save_json(OI_STRIKE_JSON, [record])
 
     print(f"  [OK] 寫入成功：週選 {len(week_strikes)} 個履約價，月選 {len(month_strikes)} 個履約價")
+    return True
 
 if __name__ == "__main__":
     # 直接指定日期

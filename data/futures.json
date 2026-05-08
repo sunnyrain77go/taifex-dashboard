@@ -366,5 +366,28 @@
       "net_oi": -386009,
       "net_oi_amount": -585836718
     }
+  },
+  {
+    "date": "2026/05/07",
+    "txf": {
+      "long_txn": 64604,
+      "short_txn": 64767,
+      "net_txn": -163,
+      "net_txn_amount": -1336810,
+      "long_oi": 20333,
+      "short_oi": 71465,
+      "net_oi": -51132,
+      "net_oi_amount": -433157920
+    },
+    "subtotal": {
+      "long_txn": 684549,
+      "short_txn": 702302,
+      "net_txn": -17753,
+      "net_txn_amount": -8288659,
+      "long_oi": 242548,
+      "short_oi": 642972,
+      "net_oi": -400424,
+      "net_oi_amount": -606575276
+    }
   }
 ]

@@ -55,7 +55,7 @@ def fetch_stock_net(twse_date=None, label_date=None):
 
     if already_exists(STOCK_NET_JSON, l_date):
         print(f"  今日資料已存在，跳過（{l_date}）")
-        return
+        return False
 
     session = make_session()
     
@@ -71,7 +71,7 @@ def fetch_stock_net(twse_date=None, label_date=None):
 
     if not tables:
         print("  [警告] 抓取失敗或無資料")
-        return
+        return False
 
     # 通常第一張表就是買賣超彙總
     df = flatten_cols(tables[0])
@@ -86,7 +86,7 @@ def fetch_stock_net(twse_date=None, label_date=None):
 
     if not net_map:
         print("  [警告] 無法解析資料內容")
-        return
+        return False
 
 
     # 取各身份別
@@ -132,6 +132,7 @@ def fetch_stock_net(twse_date=None, label_date=None):
     print(f"    自營商合計 = {sign(dealer_total)} 億元")
     print(f"    三大合計   = {sign(total)} 億元")
     print(f"    外資近5日  = {sign(record['foreign_5d'])} 億元")
+    return True
 
 
 # ============================================================
@@ -139,15 +140,15 @@ def fetch_stock_net(twse_date=None, label_date=None):
 # ============================================================
 
 if __name__ == "__main__":
-    # 允許指定日期：python fetch_stock_net.py 20260502
+    # 允許指定日期：python fetch_stock_net.py 2026/05/02
     if len(sys.argv) > 1:
         try:
-            target = datetime.strptime(sys.argv[1], "%Y%m%d")
+            target = datetime.strptime(sys.argv[1], "%Y/%m/%d")
             TODAY_TWSE  = target.strftime("%Y%m%d")
             TODAY_LABEL = target.strftime("%Y/%m/%d")
-            print(f"[手動指定日期] {TODAY_TWSE}")
+            print(f"[手動指定日期] {TODAY_LABEL}")
         except ValueError:
-            print("日期格式錯誤，請用 YYYYMMDD，例如：python fetch_stock_net.py 20260502")
+            print("日期格式錯誤，請用 YYYY/MM/DD，例如：python fetch_stock_net.py 2026/05/02")
             sys.exit(1)
 
     print(f"=== 現貨買賣超抓取 {TODAY_LABEL} ===\n")
