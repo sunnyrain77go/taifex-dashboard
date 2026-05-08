@@ -160,8 +160,13 @@ def build_summary_df():
 # ============================================================
 
 def export_excel(df):
-    # 先用 pandas 寫出基本資料
-    df.to_excel(OUTPUT_FILE, index=False, sheet_name="每日摘要")
+    try:
+        # 先用 pandas 寫出基本資料
+        df.to_excel(OUTPUT_FILE, index=False, sheet_name="每日摘要")
+    except PermissionError:
+        print(f"\n[錯誤] 無法寫入 {OUTPUT_FILE}！")
+        print(f"請先關閉正在開啟中的 Excel 檔案，然後再重新執行程式。")
+        sys.exit(1)
 
     # 再用 openpyxl 美化
     wb = load_workbook(OUTPUT_FILE)

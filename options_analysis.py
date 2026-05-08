@@ -17,6 +17,58 @@ def fetch_oi_strike(query_date, label_date):
     """
     print(f"> 選擇權各履約價 OI 分布（週選＋月選分離分析） ({query_date})")
 
+    # 抓台指期當日收盤價，算 ±10% 範圍
+    def get_twii_close(query_date):
+        """
+        query_date：YYYY/MM/DD 或 YYYY-MM-DD 格式
+        回傳指定日期的台加權指數收盤價
+        """
+        try:
+            import yfinance as yf
+            from datetime import datetime, timedelta
+
+            # 支援斜線或橫線格式
+            fmt = "%Y/%m/%d" if "/" in query_date else "%Y-%m-%d"
+            target = datetime.strptime(query_date, fmt)
+            
+            # 統一轉換為橫線格式 (YYYY-MM-DD) 以利與 hist.index 比對
+            q_date_dash = target.strftime("%Y-%m-%d")
+
+            # 多抓幾天避免假日沒資料
+            start  = (target - timedelta(days=5)).strftime("%Y-%m-%d")
+            end    = (target + timedelta(days=1)).strftime("%Y-%m-%d")
+
+            twii = yf.Ticker("^TWII")
+            hist = twii.history(start=start, end=end)
+
+            if hist.empty:
+                print(f"  [警告] 查無 {query_date} 附近的指數資料")
+                return None
+
+            # 找指定日期那筆，找不到就取最近一筆
+            hist.index = hist.index.strftime("%Y-%m-%d")
+            if q_date_dash in hist.index:
+                close = float(hist.loc[q_date_dash, "Close"])
+            else:
+                close = float(hist["Close"].iloc[-1])
+                print(f"  [提示] 找不到 {query_date} 當日收盤價，改用最近一筆交易日資料")
+
+            return close
+
+        except Exception as e:
+            print(f"  [警告] 抓現價失敗：{e}")
+            return None
+
+    current_price = get_twii_close(query_date)
+    if current_price:
+        low_bound  = current_price * 0.90
+        high_bound = current_price * 1.10
+        print(f"  現價：{current_price:,.0f}，篩選範圍：{low_bound:,.0f} ～ {high_bound:,.0f}")
+    else:
+        low_bound  = None
+        high_bound = None
+        print(f"  [提示] 無法取得現價，不篩選履約價範圍")
+
     session = make_session()
     # 先瀏覽頁面獲取必要 Cookie
     session.get("https://www.taifex.com.tw/cht/3/dlOptDailyMarketView", timeout=15)
@@ -104,17 +156,24 @@ def fetch_oi_strike(query_date, label_date):
 
     # --- 彙總與分析函式 ---
     def build_oi_map(df_src):
-        """回傳 {履約價: {call_oi, put_oi}} dict"""
-        res = {}
+        result = {}
         for _, row in df_src.iterrows():
-            strike = row["履約價"]
-            cp = str(row["買賣權"]).strip()
-            oi = int(row["未沖銷契約數"])
-            if strike not in res:
-                res[strike] = {"call_oi": 0, "put_oi": 0}
-            if cp == "買權": res[strike]["call_oi"] += oi
-            elif cp == "賣權": res[strike]["put_oi"] += oi
-        return res
+            strike  = row["履約價"]
+            cp      = str(row["買賣權"]).strip()
+            oi      = int(row["未沖銷契約數"])
+
+            # ── 篩選現價 ±10% 範圍內的履約價
+            if low_bound and high_bound:
+                if not (low_bound <= strike <= high_bound):
+                    continue
+
+            if strike not in result:
+                result[strike] = {"call_oi": 0, "put_oi": 0}
+            if cp == "買權":
+                result[strike]["call_oi"] += oi
+            elif cp == "賣權":
+                result[strike]["put_oi"] += oi
+        return result
 
     week_map  = build_oi_map(df_week)
     month_map = build_oi_map(df_month)
@@ -327,5 +386,5 @@ def fetch_oi_strike(query_date, label_date):
 
 if __name__ == "__main__":
     # 直接指定日期
-    target = "2026/04/27"
+    target = "2026/05/07"
     fetch_oi_strike(target, target)
