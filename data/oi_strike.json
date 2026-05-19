@@ -3305,5 +3305,2693 @@
         "desc": "週選月選壓力支撐對齊，趨勢明確偏多，震盪幅度較小"
       }
     ]
+  },
+  {
+    "date": "2026/05/08",
+    "weekly": {
+      "expiry": "202605W2",
+      "expiry_date": "2026/05/13",
+      "total_call_oi": 9550,
+      "total_put_oi": 14446,
+      "max_call_strike": 44000,
+      "max_call_oi": 688,
+      "max_put_strike": 35000,
+      "max_put_oi": 1127,
+      "top2_call": [
+        {
+          "strike": 44000,
+          "oi": 688
+        },
+        {
+          "strike": 43500,
+          "oi": 653
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 35000,
+          "oi": 1127
+        },
+        {
+          "strike": 40000,
+          "oi": 837
+        }
+      ],
+      "call_range": {
+        "low": 42500,
+        "high": 45500
+      },
+      "put_range": {
+        "low": 35000,
+        "high": 41000
+      },
+      "call_concentration": 7.2,
+      "put_concentration": 7.8,
+      "max_call_chg_strike": 44000,
+      "max_call_chg": 688,
+      "max_call_dec_strike": 35000,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 35000,
+      "max_put_chg": 1127,
+      "max_put_dec_strike": 45500,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 35000,
+          "call_oi": 0,
+          "put_oi": 1127,
+          "call_chg": 0,
+          "put_chg": 1127
+        },
+        {
+          "strike": 38000,
+          "call_oi": 0,
+          "put_oi": 475,
+          "call_chg": 0,
+          "put_chg": 475
+        },
+        {
+          "strike": 39000,
+          "call_oi": 2,
+          "put_oi": 523,
+          "call_chg": 2,
+          "put_chg": 523
+        },
+        {
+          "strike": 39500,
+          "call_oi": 14,
+          "put_oi": 365,
+          "call_chg": 14,
+          "put_chg": 365
+        },
+        {
+          "strike": 40000,
+          "call_oi": 24,
+          "put_oi": 837,
+          "call_chg": 24,
+          "put_chg": 837
+        },
+        {
+          "strike": 40300,
+          "call_oi": 3,
+          "put_oi": 360,
+          "call_chg": 3,
+          "put_chg": 360
+        },
+        {
+          "strike": 40400,
+          "call_oi": 15,
+          "put_oi": 307,
+          "call_chg": 15,
+          "put_chg": 307
+        },
+        {
+          "strike": 40500,
+          "call_oi": 1,
+          "put_oi": 387,
+          "call_chg": 1,
+          "put_chg": 387
+        },
+        {
+          "strike": 40600,
+          "call_oi": 3,
+          "put_oi": 353,
+          "call_chg": 3,
+          "put_chg": 353
+        },
+        {
+          "strike": 41000,
+          "call_oi": 39,
+          "put_oi": 535,
+          "call_chg": 39,
+          "put_chg": 535
+        },
+        {
+          "strike": 42500,
+          "call_oi": 365,
+          "put_oi": 7,
+          "call_chg": 365,
+          "put_chg": 7
+        },
+        {
+          "strike": 42600,
+          "call_oi": 390,
+          "put_oi": 1,
+          "call_chg": 390,
+          "put_chg": 1
+        },
+        {
+          "strike": 43000,
+          "call_oi": 449,
+          "put_oi": 3,
+          "call_chg": 449,
+          "put_chg": 3
+        },
+        {
+          "strike": 43200,
+          "call_oi": 277,
+          "put_oi": 0,
+          "call_chg": 277,
+          "put_chg": 0
+        },
+        {
+          "strike": 43300,
+          "call_oi": 429,
+          "put_oi": 1,
+          "call_chg": 429,
+          "put_chg": 1
+        },
+        {
+          "strike": 43500,
+          "call_oi": 653,
+          "put_oi": 3,
+          "call_chg": 653,
+          "put_chg": 3
+        },
+        {
+          "strike": 43600,
+          "call_oi": 389,
+          "put_oi": 0,
+          "call_chg": 389,
+          "put_chg": 0
+        },
+        {
+          "strike": 44000,
+          "call_oi": 688,
+          "put_oi": 1,
+          "call_chg": 688,
+          "put_chg": 1
+        },
+        {
+          "strike": 44500,
+          "call_oi": 301,
+          "put_oi": 0,
+          "call_chg": 301,
+          "put_chg": 0
+        },
+        {
+          "strike": 45500,
+          "call_oi": 627,
+          "put_oi": 0,
+          "call_chg": 627,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 26192,
+      "total_put_oi": 52381,
+      "max_call_strike": 38000,
+      "max_call_oi": 1272,
+      "max_put_strike": 26900,
+      "max_put_oi": 2689,
+      "top2_call": [
+        {
+          "strike": 38000,
+          "oi": 1272
+        },
+        {
+          "strike": 40000,
+          "oi": 1236
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 26900,
+          "oi": 2689
+        },
+        {
+          "strike": 36000,
+          "oi": 2020
+        }
+      ],
+      "call_range": {
+        "low": 33000,
+        "high": 45000
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 38000
+      },
+      "call_concentration": 4.9,
+      "put_concentration": 5.1,
+      "max_call_chg_strike": 38000,
+      "max_call_chg": 1272,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 26900,
+      "max_put_chg": 2689,
+      "max_put_dec_strike": 45000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2689,
+          "call_chg": 0,
+          "put_chg": 2689
+        },
+        {
+          "strike": 29000,
+          "call_oi": 0,
+          "put_oi": 1333,
+          "call_chg": 0,
+          "put_chg": 1333
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 1719,
+          "call_chg": 1,
+          "put_chg": 1719
+        },
+        {
+          "strike": 31000,
+          "call_oi": 0,
+          "put_oi": 1307,
+          "call_chg": 0,
+          "put_chg": 1307
+        },
+        {
+          "strike": 33000,
+          "call_oi": 541,
+          "put_oi": 1501,
+          "call_chg": 541,
+          "put_chg": 1501
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 1955,
+          "call_chg": 30,
+          "put_chg": 1955
+        },
+        {
+          "strike": 34500,
+          "call_oi": 29,
+          "put_oi": 1392,
+          "call_chg": 29,
+          "put_chg": 1392
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 1995,
+          "call_chg": 58,
+          "put_chg": 1995
+        },
+        {
+          "strike": 36000,
+          "call_oi": 534,
+          "put_oi": 2020,
+          "call_chg": 534,
+          "put_chg": 2020
+        },
+        {
+          "strike": 37800,
+          "call_oi": 1140,
+          "put_oi": 403,
+          "call_chg": 1140,
+          "put_chg": 403
+        },
+        {
+          "strike": 37900,
+          "call_oi": 1137,
+          "put_oi": 219,
+          "call_chg": 1137,
+          "put_chg": 219
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1272,
+          "put_oi": 1494,
+          "call_chg": 1272,
+          "put_chg": 1494
+        },
+        {
+          "strike": 39000,
+          "call_oi": 592,
+          "put_oi": 926,
+          "call_chg": 592,
+          "put_chg": 926
+        },
+        {
+          "strike": 40000,
+          "call_oi": 1236,
+          "put_oi": 888,
+          "call_chg": 1236,
+          "put_chg": 888
+        },
+        {
+          "strike": 40800,
+          "call_oi": 564,
+          "put_oi": 87,
+          "call_chg": 564,
+          "put_chg": 87
+        },
+        {
+          "strike": 43000,
+          "call_oi": 867,
+          "put_oi": 6,
+          "call_chg": 867,
+          "put_chg": 6
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1063,
+          "put_oi": 4,
+          "call_chg": 1063,
+          "put_chg": 4
+        },
+        {
+          "strike": 45000,
+          "call_oi": 840,
+          "put_oi": 0,
+          "call_chg": 840,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(35,000) > 月選支撐(26,900)，短線撐住但長線偏弱，需注意月選結算壓力"
+      },
+      {
+        "type": "多頭一致",
+        "desc": "週選月選壓力支撐對齊，趨勢明確偏多，震盪幅度較小"
+      }
+    ]
+  },
+  {
+    "date": "2026/05/11",
+    "weekly": {
+      "expiry": "202605W2",
+      "expiry_date": "2026/05/13",
+      "total_call_oi": 29310,
+      "total_put_oi": 37458,
+      "max_call_strike": 43500,
+      "max_call_oi": 1831,
+      "max_put_strike": 40000,
+      "max_put_oi": 2121,
+      "top2_call": [
+        {
+          "strike": 43500,
+          "oi": 1831
+        },
+        {
+          "strike": 45000,
+          "oi": 1714
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 40000,
+          "oi": 2121
+        },
+        {
+          "strike": 41000,
+          "oi": 1878
+        }
+      ],
+      "call_range": {
+        "low": 42400,
+        "high": 45000
+      },
+      "put_range": {
+        "low": 35000,
+        "high": 41500
+      },
+      "call_concentration": 6.2,
+      "put_concentration": 5.7,
+      "max_call_chg_strike": 43500,
+      "max_call_chg": 1831,
+      "max_call_dec_strike": 35000,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 40000,
+      "max_put_chg": 2121,
+      "max_put_dec_strike": 45000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 35000,
+          "call_oi": 0,
+          "put_oi": 1049,
+          "call_chg": 0,
+          "put_chg": 1049
+        },
+        {
+          "strike": 40000,
+          "call_oi": 22,
+          "put_oi": 2121,
+          "call_chg": 22,
+          "put_chg": 2121
+        },
+        {
+          "strike": 40500,
+          "call_oi": 1,
+          "put_oi": 1527,
+          "call_chg": 1,
+          "put_chg": 1527
+        },
+        {
+          "strike": 40600,
+          "call_oi": 3,
+          "put_oi": 1487,
+          "call_chg": 3,
+          "put_chg": 1487
+        },
+        {
+          "strike": 40700,
+          "call_oi": 6,
+          "put_oi": 856,
+          "call_chg": 6,
+          "put_chg": 856
+        },
+        {
+          "strike": 40800,
+          "call_oi": 12,
+          "put_oi": 783,
+          "call_chg": 12,
+          "put_chg": 783
+        },
+        {
+          "strike": 40950,
+          "call_oi": 3,
+          "put_oi": 801,
+          "call_chg": 3,
+          "put_chg": 801
+        },
+        {
+          "strike": 41000,
+          "call_oi": 89,
+          "put_oi": 1878,
+          "call_chg": 89,
+          "put_chg": 1878
+        },
+        {
+          "strike": 41200,
+          "call_oi": 172,
+          "put_oi": 816,
+          "call_chg": 172,
+          "put_chg": 816
+        },
+        {
+          "strike": 41500,
+          "call_oi": 296,
+          "put_oi": 1070,
+          "call_chg": 296,
+          "put_chg": 1070
+        },
+        {
+          "strike": 42400,
+          "call_oi": 1627,
+          "put_oi": 360,
+          "call_chg": 1627,
+          "put_chg": 360
+        },
+        {
+          "strike": 42500,
+          "call_oi": 1105,
+          "put_oi": 34,
+          "call_chg": 1105,
+          "put_chg": 34
+        },
+        {
+          "strike": 42600,
+          "call_oi": 928,
+          "put_oi": 8,
+          "call_chg": 928,
+          "put_chg": 8
+        },
+        {
+          "strike": 43000,
+          "call_oi": 1672,
+          "put_oi": 8,
+          "call_chg": 1672,
+          "put_chg": 8
+        },
+        {
+          "strike": 43200,
+          "call_oi": 1020,
+          "put_oi": 30,
+          "call_chg": 1020,
+          "put_chg": 30
+        },
+        {
+          "strike": 43300,
+          "call_oi": 1352,
+          "put_oi": 1,
+          "call_chg": 1352,
+          "put_chg": 1
+        },
+        {
+          "strike": 43500,
+          "call_oi": 1831,
+          "put_oi": 3,
+          "call_chg": 1831,
+          "put_chg": 3
+        },
+        {
+          "strike": 43600,
+          "call_oi": 936,
+          "put_oi": 0,
+          "call_chg": 936,
+          "put_chg": 0
+        },
+        {
+          "strike": 44000,
+          "call_oi": 973,
+          "put_oi": 1,
+          "call_chg": 973,
+          "put_chg": 1
+        },
+        {
+          "strike": 45000,
+          "call_oi": 1714,
+          "put_oi": 0,
+          "call_chg": 1714,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 26975,
+      "total_put_oi": 52835,
+      "max_call_strike": 38000,
+      "max_call_oi": 1272,
+      "max_put_strike": 26900,
+      "max_put_oi": 2663,
+      "top2_call": [
+        {
+          "strike": 38000,
+          "oi": 1272
+        },
+        {
+          "strike": 48300,
+          "oi": 1197
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 26900,
+          "oi": 2663
+        },
+        {
+          "strike": 35000,
+          "oi": 2442
+        }
+      ],
+      "call_range": {
+        "low": 37800,
+        "high": 48300
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 38000
+      },
+      "call_concentration": 4.7,
+      "put_concentration": 5.0,
+      "max_call_chg_strike": 38000,
+      "max_call_chg": 1272,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 26900,
+      "max_put_chg": 2663,
+      "max_put_dec_strike": 48300,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2663,
+          "call_chg": 0,
+          "put_chg": 2663
+        },
+        {
+          "strike": 27000,
+          "call_oi": 0,
+          "put_oi": 1255,
+          "call_chg": 0,
+          "put_chg": 1255
+        },
+        {
+          "strike": 29000,
+          "call_oi": 0,
+          "put_oi": 1338,
+          "call_chg": 0,
+          "put_chg": 1338
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 1594,
+          "call_chg": 1,
+          "put_chg": 1594
+        },
+        {
+          "strike": 33000,
+          "call_oi": 541,
+          "put_oi": 1482,
+          "call_chg": 541,
+          "put_chg": 1482
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 1714,
+          "call_chg": 30,
+          "put_chg": 1714
+        },
+        {
+          "strike": 34500,
+          "call_oi": 29,
+          "put_oi": 1345,
+          "call_chg": 29,
+          "put_chg": 1345
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 2442,
+          "call_chg": 58,
+          "put_chg": 2442
+        },
+        {
+          "strike": 36000,
+          "call_oi": 534,
+          "put_oi": 1837,
+          "call_chg": 534,
+          "put_chg": 1837
+        },
+        {
+          "strike": 37800,
+          "call_oi": 1140,
+          "put_oi": 465,
+          "call_chg": 1140,
+          "put_chg": 465
+        },
+        {
+          "strike": 37900,
+          "call_oi": 1136,
+          "put_oi": 205,
+          "call_chg": 1136,
+          "put_chg": 205
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1272,
+          "put_oi": 1534,
+          "call_chg": 1272,
+          "put_chg": 1534
+        },
+        {
+          "strike": 39000,
+          "call_oi": 591,
+          "put_oi": 1065,
+          "call_chg": 591,
+          "put_chg": 1065
+        },
+        {
+          "strike": 40000,
+          "call_oi": 1020,
+          "put_oi": 847,
+          "call_chg": 1020,
+          "put_chg": 847
+        },
+        {
+          "strike": 40800,
+          "call_oi": 558,
+          "put_oi": 107,
+          "call_chg": 558,
+          "put_chg": 107
+        },
+        {
+          "strike": 43000,
+          "call_oi": 865,
+          "put_oi": 9,
+          "call_chg": 865,
+          "put_chg": 9
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1079,
+          "put_oi": 4,
+          "call_chg": 1079,
+          "put_chg": 4
+        },
+        {
+          "strike": 45000,
+          "call_oi": 812,
+          "put_oi": 0,
+          "call_chg": 812,
+          "put_chg": 0
+        },
+        {
+          "strike": 48300,
+          "call_oi": 1197,
+          "put_oi": 0,
+          "call_chg": 1197,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(40,000) > 月選支撐(26,900)，短線撐住但長線偏弱，需注意月選結算壓力"
+      },
+      {
+        "type": "多頭一致",
+        "desc": "週選月選壓力支撐對齊，趨勢明確偏多，震盪幅度較小"
+      }
+    ]
+  },
+  {
+    "date": "2026/05/12",
+    "weekly": {
+      "expiry": "202605W2",
+      "expiry_date": "2026/05/13",
+      "total_call_oi": 38158,
+      "total_put_oi": 51635,
+      "max_call_strike": 45000,
+      "max_call_oi": 2282,
+      "max_put_strike": 41000,
+      "max_put_oi": 3466,
+      "top2_call": [
+        {
+          "strike": 45000,
+          "oi": 2282
+        },
+        {
+          "strike": 42400,
+          "oi": 2134
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 41000,
+          "oi": 3466
+        },
+        {
+          "strike": 40800,
+          "oi": 2425
+        }
+      ],
+      "call_range": {
+        "low": 42000,
+        "high": 45000
+      },
+      "put_range": {
+        "low": 40000,
+        "high": 41700
+      },
+      "call_concentration": 6.0,
+      "put_concentration": 6.7,
+      "max_call_chg_strike": 45000,
+      "max_call_chg": 2282,
+      "max_call_dec_strike": 40500,
+      "max_call_dec": 1,
+      "max_put_chg_strike": 41000,
+      "max_put_chg": 3466,
+      "max_put_dec_strike": 45000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 40000,
+          "call_oi": 22,
+          "put_oi": 2309,
+          "call_chg": 22,
+          "put_chg": 2309
+        },
+        {
+          "strike": 40500,
+          "call_oi": 1,
+          "put_oi": 2056,
+          "call_chg": 1,
+          "put_chg": 2056
+        },
+        {
+          "strike": 40600,
+          "call_oi": 3,
+          "put_oi": 1496,
+          "call_chg": 3,
+          "put_chg": 1496
+        },
+        {
+          "strike": 40800,
+          "call_oi": 13,
+          "put_oi": 2425,
+          "call_chg": 13,
+          "put_chg": 2425
+        },
+        {
+          "strike": 40900,
+          "call_oi": 5,
+          "put_oi": 1542,
+          "call_chg": 5,
+          "put_chg": 1542
+        },
+        {
+          "strike": 41000,
+          "call_oi": 54,
+          "put_oi": 3466,
+          "call_chg": 54,
+          "put_chg": 3466
+        },
+        {
+          "strike": 41200,
+          "call_oi": 113,
+          "put_oi": 1353,
+          "call_chg": 113,
+          "put_chg": 1353
+        },
+        {
+          "strike": 41400,
+          "call_oi": 217,
+          "put_oi": 1160,
+          "call_chg": 217,
+          "put_chg": 1160
+        },
+        {
+          "strike": 41500,
+          "call_oi": 307,
+          "put_oi": 1430,
+          "call_chg": 307,
+          "put_chg": 1430
+        },
+        {
+          "strike": 41700,
+          "call_oi": 338,
+          "put_oi": 1084,
+          "call_chg": 338,
+          "put_chg": 1084
+        },
+        {
+          "strike": 42000,
+          "call_oi": 1254,
+          "put_oi": 729,
+          "call_chg": 1254,
+          "put_chg": 729
+        },
+        {
+          "strike": 42300,
+          "call_oi": 1160,
+          "put_oi": 272,
+          "call_chg": 1160,
+          "put_chg": 272
+        },
+        {
+          "strike": 42400,
+          "call_oi": 2134,
+          "put_oi": 326,
+          "call_chg": 2134,
+          "put_chg": 326
+        },
+        {
+          "strike": 42500,
+          "call_oi": 1707,
+          "put_oi": 63,
+          "call_chg": 1707,
+          "put_chg": 63
+        },
+        {
+          "strike": 42600,
+          "call_oi": 1558,
+          "put_oi": 17,
+          "call_chg": 1558,
+          "put_chg": 17
+        },
+        {
+          "strike": 43000,
+          "call_oi": 1422,
+          "put_oi": 12,
+          "call_chg": 1422,
+          "put_chg": 12
+        },
+        {
+          "strike": 43200,
+          "call_oi": 1193,
+          "put_oi": 30,
+          "call_chg": 1193,
+          "put_chg": 30
+        },
+        {
+          "strike": 43300,
+          "call_oi": 1200,
+          "put_oi": 1,
+          "call_chg": 1200,
+          "put_chg": 1
+        },
+        {
+          "strike": 43500,
+          "call_oi": 1578,
+          "put_oi": 3,
+          "call_chg": 1578,
+          "put_chg": 3
+        },
+        {
+          "strike": 45000,
+          "call_oi": 2282,
+          "put_oi": 0,
+          "call_chg": 2282,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 29533,
+      "total_put_oi": 56043,
+      "max_call_strike": 48300,
+      "max_call_oi": 1962,
+      "max_put_strike": 35000,
+      "max_put_oi": 3139,
+      "top2_call": [
+        {
+          "strike": 48300,
+          "oi": 1962
+        },
+        {
+          "strike": 44000,
+          "oi": 1499
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 35000,
+          "oi": 3139
+        },
+        {
+          "strike": 26900,
+          "oi": 2672
+        }
+      ],
+      "call_range": {
+        "low": 37800,
+        "high": 48300
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 38000
+      },
+      "call_concentration": 6.6,
+      "put_concentration": 5.6,
+      "max_call_chg_strike": 48300,
+      "max_call_chg": 1962,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 35000,
+      "max_put_chg": 3139,
+      "max_put_dec_strike": 48300,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2672,
+          "call_chg": 0,
+          "put_chg": 2672
+        },
+        {
+          "strike": 27000,
+          "call_oi": 0,
+          "put_oi": 1255,
+          "call_chg": 0,
+          "put_chg": 1255
+        },
+        {
+          "strike": 29000,
+          "call_oi": 0,
+          "put_oi": 1335,
+          "call_chg": 0,
+          "put_chg": 1335
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 1481,
+          "call_chg": 1,
+          "put_chg": 1481
+        },
+        {
+          "strike": 33000,
+          "call_oi": 541,
+          "put_oi": 1455,
+          "call_chg": 541,
+          "put_chg": 1455
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 2109,
+          "call_chg": 30,
+          "put_chg": 2109
+        },
+        {
+          "strike": 34500,
+          "call_oi": 29,
+          "put_oi": 1346,
+          "call_chg": 29,
+          "put_chg": 1346
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 3139,
+          "call_chg": 58,
+          "put_chg": 3139
+        },
+        {
+          "strike": 36000,
+          "call_oi": 534,
+          "put_oi": 1831,
+          "call_chg": 534,
+          "put_chg": 1831
+        },
+        {
+          "strike": 37800,
+          "call_oi": 1140,
+          "put_oi": 474,
+          "call_chg": 1140,
+          "put_chg": 474
+        },
+        {
+          "strike": 37900,
+          "call_oi": 1136,
+          "put_oi": 206,
+          "call_chg": 1136,
+          "put_chg": 206
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1271,
+          "put_oi": 1654,
+          "call_chg": 1271,
+          "put_chg": 1654
+        },
+        {
+          "strike": 39000,
+          "call_oi": 589,
+          "put_oi": 1181,
+          "call_chg": 589,
+          "put_chg": 1181
+        },
+        {
+          "strike": 40000,
+          "call_oi": 974,
+          "put_oi": 1066,
+          "call_chg": 974,
+          "put_chg": 1066
+        },
+        {
+          "strike": 43000,
+          "call_oi": 886,
+          "put_oi": 18,
+          "call_chg": 886,
+          "put_chg": 18
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1499,
+          "put_oi": 4,
+          "call_chg": 1499,
+          "put_chg": 4
+        },
+        {
+          "strike": 44500,
+          "call_oi": 581,
+          "put_oi": 0,
+          "call_chg": 581,
+          "put_chg": 0
+        },
+        {
+          "strike": 45000,
+          "call_oi": 811,
+          "put_oi": 0,
+          "call_chg": 811,
+          "put_chg": 0
+        },
+        {
+          "strike": 48300,
+          "call_oi": 1962,
+          "put_oi": 0,
+          "call_chg": 1962,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短空長多",
+        "desc": "週選壓力(45,000) < 月選壓力(48,300)，短線有壓但長線看好，預期震盪偏多"
+      },
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(41,000) > 月選支撐(35,000)，短線撐住但長線偏弱，需注意月選結算壓力"
+      }
+    ]
+  },
+  {
+    "date": "2026/05/13",
+    "weekly": {
+      "expiry": "202605W2",
+      "expiry_date": "2026/05/13",
+      "total_call_oi": 68540,
+      "total_put_oi": 80059,
+      "max_call_strike": 42000,
+      "max_call_oi": 6792,
+      "max_put_strike": 41000,
+      "max_put_oi": 5587,
+      "top2_call": [
+        {
+          "strike": 42000,
+          "oi": 6792
+        },
+        {
+          "strike": 41500,
+          "oi": 4959
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 41000,
+          "oi": 5587
+        },
+        {
+          "strike": 41200,
+          "oi": 3786
+        }
+      ],
+      "call_range": {
+        "low": 41500,
+        "high": 45000
+      },
+      "put_range": {
+        "low": 40000,
+        "high": 41400
+      },
+      "call_concentration": 9.9,
+      "put_concentration": 7.0,
+      "max_call_chg_strike": 42000,
+      "max_call_chg": 6792,
+      "max_call_dec_strike": 40000,
+      "max_call_dec": 22,
+      "max_put_chg_strike": 41000,
+      "max_put_chg": 5587,
+      "max_put_dec_strike": 45000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 40000,
+          "call_oi": 22,
+          "put_oi": 3065,
+          "call_chg": 22,
+          "put_chg": 3065
+        },
+        {
+          "strike": 40500,
+          "call_oi": 71,
+          "put_oi": 3040,
+          "call_chg": 71,
+          "put_chg": 3040
+        },
+        {
+          "strike": 40800,
+          "call_oi": 224,
+          "put_oi": 3683,
+          "call_chg": 224,
+          "put_chg": 3683
+        },
+        {
+          "strike": 40900,
+          "call_oi": 308,
+          "put_oi": 2650,
+          "call_chg": 308,
+          "put_chg": 2650
+        },
+        {
+          "strike": 41000,
+          "call_oi": 475,
+          "put_oi": 5587,
+          "call_chg": 475,
+          "put_chg": 5587
+        },
+        {
+          "strike": 41100,
+          "call_oi": 593,
+          "put_oi": 3158,
+          "call_chg": 593,
+          "put_chg": 3158
+        },
+        {
+          "strike": 41200,
+          "call_oi": 955,
+          "put_oi": 3786,
+          "call_chg": 955,
+          "put_chg": 3786
+        },
+        {
+          "strike": 41250,
+          "call_oi": 707,
+          "put_oi": 2605,
+          "call_chg": 707,
+          "put_chg": 2605
+        },
+        {
+          "strike": 41300,
+          "call_oi": 965,
+          "put_oi": 2740,
+          "call_chg": 965,
+          "put_chg": 2740
+        },
+        {
+          "strike": 41400,
+          "call_oi": 1484,
+          "put_oi": 2508,
+          "call_chg": 1484,
+          "put_chg": 2508
+        },
+        {
+          "strike": 41500,
+          "call_oi": 4959,
+          "put_oi": 1253,
+          "call_chg": 4959,
+          "put_chg": 1253
+        },
+        {
+          "strike": 41600,
+          "call_oi": 2148,
+          "put_oi": 598,
+          "call_chg": 2148,
+          "put_chg": 598
+        },
+        {
+          "strike": 41700,
+          "call_oi": 2241,
+          "put_oi": 786,
+          "call_chg": 2241,
+          "put_chg": 786
+        },
+        {
+          "strike": 41800,
+          "call_oi": 2221,
+          "put_oi": 797,
+          "call_chg": 2221,
+          "put_chg": 797
+        },
+        {
+          "strike": 41900,
+          "call_oi": 2711,
+          "put_oi": 286,
+          "call_chg": 2711,
+          "put_chg": 286
+        },
+        {
+          "strike": 42000,
+          "call_oi": 6792,
+          "put_oi": 371,
+          "call_chg": 6792,
+          "put_chg": 371
+        },
+        {
+          "strike": 42100,
+          "call_oi": 1753,
+          "put_oi": 199,
+          "call_chg": 1753,
+          "put_chg": 199
+        },
+        {
+          "strike": 42300,
+          "call_oi": 1714,
+          "put_oi": 174,
+          "call_chg": 1714,
+          "put_chg": 174
+        },
+        {
+          "strike": 42600,
+          "call_oi": 1759,
+          "put_oi": 6,
+          "call_chg": 1759,
+          "put_chg": 6
+        },
+        {
+          "strike": 45000,
+          "call_oi": 2175,
+          "put_oi": 0,
+          "call_chg": 2175,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 34612,
+      "total_put_oi": 58763,
+      "max_call_strike": 48300,
+      "max_call_oi": 2160,
+      "max_put_strike": 35000,
+      "max_put_oi": 3824,
+      "top2_call": [
+        {
+          "strike": 48300,
+          "oi": 2160
+        },
+        {
+          "strike": 44000,
+          "oi": 1474
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 35000,
+          "oi": 3824
+        },
+        {
+          "strike": 26900,
+          "oi": 2744
+        }
+      ],
+      "call_range": {
+        "low": 37800,
+        "high": 48300
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 39000
+      },
+      "call_concentration": 6.2,
+      "put_concentration": 6.5,
+      "max_call_chg_strike": 48300,
+      "max_call_chg": 2160,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 35000,
+      "max_put_chg": 3824,
+      "max_put_dec_strike": 48300,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2744,
+          "call_chg": 0,
+          "put_chg": 2744
+        },
+        {
+          "strike": 29000,
+          "call_oi": 0,
+          "put_oi": 1337,
+          "call_chg": 0,
+          "put_chg": 1337
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 1526,
+          "call_chg": 1,
+          "put_chg": 1526
+        },
+        {
+          "strike": 33000,
+          "call_oi": 541,
+          "put_oi": 1423,
+          "call_chg": 541,
+          "put_chg": 1423
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 2161,
+          "call_chg": 30,
+          "put_chg": 2161
+        },
+        {
+          "strike": 34500,
+          "call_oi": 29,
+          "put_oi": 1335,
+          "call_chg": 29,
+          "put_chg": 1335
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 3824,
+          "call_chg": 58,
+          "put_chg": 3824
+        },
+        {
+          "strike": 36000,
+          "call_oi": 534,
+          "put_oi": 1871,
+          "call_chg": 534,
+          "put_chg": 1871
+        },
+        {
+          "strike": 37800,
+          "call_oi": 1140,
+          "put_oi": 529,
+          "call_chg": 1140,
+          "put_chg": 529
+        },
+        {
+          "strike": 37900,
+          "call_oi": 1136,
+          "put_oi": 211,
+          "call_chg": 1136,
+          "put_chg": 211
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1260,
+          "put_oi": 2054,
+          "call_chg": 1260,
+          "put_chg": 2054
+        },
+        {
+          "strike": 39000,
+          "call_oi": 589,
+          "put_oi": 1263,
+          "call_chg": 589,
+          "put_chg": 1263
+        },
+        {
+          "strike": 40000,
+          "call_oi": 949,
+          "put_oi": 1171,
+          "call_chg": 949,
+          "put_chg": 1171
+        },
+        {
+          "strike": 43000,
+          "call_oi": 1075,
+          "put_oi": 15,
+          "call_chg": 1075,
+          "put_chg": 15
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1474,
+          "put_oi": 4,
+          "call_chg": 1474,
+          "put_chg": 4
+        },
+        {
+          "strike": 45000,
+          "call_oi": 1257,
+          "put_oi": 0,
+          "call_chg": 1257,
+          "put_chg": 0
+        },
+        {
+          "strike": 47500,
+          "call_oi": 1261,
+          "put_oi": 0,
+          "call_chg": 1261,
+          "put_chg": 0
+        },
+        {
+          "strike": 48000,
+          "call_oi": 713,
+          "put_oi": 0,
+          "call_chg": 713,
+          "put_chg": 0
+        },
+        {
+          "strike": 48300,
+          "call_oi": 2160,
+          "put_oi": 0,
+          "call_chg": 2160,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短空長多",
+        "desc": "週選壓力(42,000) < 月選壓力(48,300)，短線有壓但長線看好，預期震盪偏多"
+      },
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(41,000) > 月選支撐(35,000)，短線撐住但長線偏弱，需注意月選結算壓力"
+      }
+    ]
+  },
+  {
+    "date": "2026/05/14",
+    "weekly": {
+      "expiry": "202605W4",
+      "expiry_date": "2026/05/27",
+      "total_call_oi": 244,
+      "total_put_oi": 886,
+      "max_call_strike": 44700,
+      "max_call_oi": 36,
+      "max_put_strike": 39600,
+      "max_put_oi": 85,
+      "top2_call": [
+        {
+          "strike": 44700,
+          "oi": 36
+        },
+        {
+          "strike": 46000,
+          "oi": 25
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 39600,
+          "oi": 85
+        },
+        {
+          "strike": 37200,
+          "oi": 83
+        }
+      ],
+      "call_range": {
+        "low": 41700,
+        "high": 46100
+      },
+      "put_range": {
+        "low": 37200,
+        "high": 40000
+      },
+      "call_concentration": 14.8,
+      "put_concentration": 9.6,
+      "max_call_chg_strike": 44700,
+      "max_call_chg": 36,
+      "max_call_dec_strike": 39600,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 39600,
+      "max_put_chg": 85,
+      "max_put_dec_strike": 44700,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 37200,
+          "call_oi": 0,
+          "put_oi": 83,
+          "call_chg": 0,
+          "put_chg": 83
+        },
+        {
+          "strike": 37500,
+          "call_oi": 0,
+          "put_oi": 53,
+          "call_chg": 0,
+          "put_chg": 53
+        },
+        {
+          "strike": 37700,
+          "call_oi": 0,
+          "put_oi": 60,
+          "call_chg": 0,
+          "put_chg": 60
+        },
+        {
+          "strike": 37800,
+          "call_oi": 0,
+          "put_oi": 35,
+          "call_chg": 0,
+          "put_chg": 35
+        },
+        {
+          "strike": 38000,
+          "call_oi": 0,
+          "put_oi": 40,
+          "call_chg": 0,
+          "put_chg": 40
+        },
+        {
+          "strike": 38200,
+          "call_oi": 0,
+          "put_oi": 81,
+          "call_chg": 0,
+          "put_chg": 81
+        },
+        {
+          "strike": 39600,
+          "call_oi": 0,
+          "put_oi": 85,
+          "call_chg": 0,
+          "put_chg": 85
+        },
+        {
+          "strike": 39700,
+          "call_oi": 0,
+          "put_oi": 56,
+          "call_chg": 0,
+          "put_chg": 56
+        },
+        {
+          "strike": 39800,
+          "call_oi": 0,
+          "put_oi": 55,
+          "call_chg": 0,
+          "put_chg": 55
+        },
+        {
+          "strike": 40000,
+          "call_oi": 0,
+          "put_oi": 70,
+          "call_chg": 0,
+          "put_chg": 70
+        },
+        {
+          "strike": 41700,
+          "call_oi": 11,
+          "put_oi": 2,
+          "call_chg": 11,
+          "put_chg": 2
+        },
+        {
+          "strike": 41800,
+          "call_oi": 10,
+          "put_oi": 2,
+          "call_chg": 10,
+          "put_chg": 2
+        },
+        {
+          "strike": 41900,
+          "call_oi": 20,
+          "put_oi": 2,
+          "call_chg": 20,
+          "put_chg": 2
+        },
+        {
+          "strike": 43600,
+          "call_oi": 16,
+          "put_oi": 0,
+          "call_chg": 16,
+          "put_chg": 0
+        },
+        {
+          "strike": 44700,
+          "call_oi": 36,
+          "put_oi": 0,
+          "call_chg": 36,
+          "put_chg": 0
+        },
+        {
+          "strike": 44800,
+          "call_oi": 10,
+          "put_oi": 0,
+          "call_chg": 10,
+          "put_chg": 0
+        },
+        {
+          "strike": 45000,
+          "call_oi": 16,
+          "put_oi": 0,
+          "call_chg": 16,
+          "put_chg": 0
+        },
+        {
+          "strike": 45400,
+          "call_oi": 7,
+          "put_oi": 0,
+          "call_chg": 7,
+          "put_chg": 0
+        },
+        {
+          "strike": 46000,
+          "call_oi": 25,
+          "put_oi": 0,
+          "call_chg": 25,
+          "put_chg": 0
+        },
+        {
+          "strike": 46100,
+          "call_oi": 10,
+          "put_oi": 0,
+          "call_chg": 10,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 37227,
+      "total_put_oi": 63406,
+      "max_call_strike": 48300,
+      "max_call_oi": 2165,
+      "max_put_strike": 35000,
+      "max_put_oi": 4201,
+      "top2_call": [
+        {
+          "strike": 48300,
+          "oi": 2165
+        },
+        {
+          "strike": 44000,
+          "oi": 1496
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 35000,
+          "oi": 4201
+        },
+        {
+          "strike": 26900,
+          "oi": 2440
+        }
+      ],
+      "call_range": {
+        "low": 37800,
+        "high": 48300
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 40000
+      },
+      "call_concentration": 5.8,
+      "put_concentration": 6.6,
+      "max_call_chg_strike": 48300,
+      "max_call_chg": 2165,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 35000,
+      "max_put_chg": 4201,
+      "max_put_dec_strike": 48300,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2440,
+          "call_chg": 0,
+          "put_chg": 2440
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 1515,
+          "call_chg": 1,
+          "put_chg": 1515
+        },
+        {
+          "strike": 33000,
+          "call_oi": 541,
+          "put_oi": 1418,
+          "call_chg": 541,
+          "put_chg": 1418
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 2158,
+          "call_chg": 30,
+          "put_chg": 2158
+        },
+        {
+          "strike": 34500,
+          "call_oi": 29,
+          "put_oi": 1341,
+          "call_chg": 29,
+          "put_chg": 1341
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 4201,
+          "call_chg": 58,
+          "put_chg": 4201
+        },
+        {
+          "strike": 36000,
+          "call_oi": 534,
+          "put_oi": 1947,
+          "call_chg": 534,
+          "put_chg": 1947
+        },
+        {
+          "strike": 37800,
+          "call_oi": 1140,
+          "put_oi": 554,
+          "call_chg": 1140,
+          "put_chg": 554
+        },
+        {
+          "strike": 37900,
+          "call_oi": 1136,
+          "put_oi": 192,
+          "call_chg": 1136,
+          "put_chg": 192
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1264,
+          "put_oi": 2233,
+          "call_chg": 1264,
+          "put_chg": 2233
+        },
+        {
+          "strike": 39000,
+          "call_oi": 591,
+          "put_oi": 1544,
+          "call_chg": 591,
+          "put_chg": 1544
+        },
+        {
+          "strike": 40000,
+          "call_oi": 899,
+          "put_oi": 1463,
+          "call_chg": 899,
+          "put_chg": 1463
+        },
+        {
+          "strike": 43000,
+          "call_oi": 1121,
+          "put_oi": 19,
+          "call_chg": 1121,
+          "put_chg": 19
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1496,
+          "put_oi": 3,
+          "call_chg": 1496,
+          "put_chg": 3
+        },
+        {
+          "strike": 45000,
+          "call_oi": 1409,
+          "put_oi": 0,
+          "call_chg": 1409,
+          "put_chg": 0
+        },
+        {
+          "strike": 46000,
+          "call_oi": 975,
+          "put_oi": 0,
+          "call_chg": 975,
+          "put_chg": 0
+        },
+        {
+          "strike": 47500,
+          "call_oi": 1284,
+          "put_oi": 0,
+          "call_chg": 1284,
+          "put_chg": 0
+        },
+        {
+          "strike": 48300,
+          "call_oi": 2165,
+          "put_oi": 0,
+          "call_chg": 2165,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短空長多",
+        "desc": "週選壓力(44,700) < 月選壓力(48,300)，短線有壓但長線看好，預期震盪偏多"
+      },
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(39,600) > 月選支撐(35,000)，短線撐住但長線偏弱，需注意月選結算壓力"
+      }
+    ]
+  },
+  {
+    "date": "2026/05/15",
+    "weekly": {
+      "expiry": "202605W4",
+      "expiry_date": "2026/05/27",
+      "total_call_oi": 534,
+      "total_put_oi": 1487,
+      "max_call_strike": 44000,
+      "max_call_oi": 97,
+      "max_put_strike": 37200,
+      "max_put_oi": 229,
+      "top2_call": [
+        {
+          "strike": 44000,
+          "oi": 97
+        },
+        {
+          "strike": 44700,
+          "oi": 39
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 37200,
+          "oi": 229
+        },
+        {
+          "strike": 41200,
+          "oi": 97
+        }
+      ],
+      "call_range": {
+        "low": 41900,
+        "high": 46100
+      },
+      "put_range": {
+        "low": 37200,
+        "high": 41200
+      },
+      "call_concentration": 18.2,
+      "put_concentration": 15.4,
+      "max_call_chg_strike": 44000,
+      "max_call_chg": 97,
+      "max_call_dec_strike": 37200,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 37200,
+      "max_put_chg": 229,
+      "max_put_dec_strike": 44000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 37200,
+          "call_oi": 0,
+          "put_oi": 229,
+          "call_chg": 0,
+          "put_chg": 229
+        },
+        {
+          "strike": 37500,
+          "call_oi": 0,
+          "put_oi": 56,
+          "call_chg": 0,
+          "put_chg": 56
+        },
+        {
+          "strike": 37700,
+          "call_oi": 0,
+          "put_oi": 71,
+          "call_chg": 0,
+          "put_chg": 71
+        },
+        {
+          "strike": 38000,
+          "call_oi": 0,
+          "put_oi": 53,
+          "call_chg": 0,
+          "put_chg": 53
+        },
+        {
+          "strike": 38200,
+          "call_oi": 0,
+          "put_oi": 81,
+          "call_chg": 0,
+          "put_chg": 81
+        },
+        {
+          "strike": 39600,
+          "call_oi": 0,
+          "put_oi": 87,
+          "call_chg": 0,
+          "put_chg": 87
+        },
+        {
+          "strike": 39700,
+          "call_oi": 0,
+          "put_oi": 57,
+          "call_chg": 0,
+          "put_chg": 57
+        },
+        {
+          "strike": 39800,
+          "call_oi": 0,
+          "put_oi": 58,
+          "call_chg": 0,
+          "put_chg": 58
+        },
+        {
+          "strike": 40000,
+          "call_oi": 0,
+          "put_oi": 94,
+          "call_chg": 0,
+          "put_chg": 94
+        },
+        {
+          "strike": 41200,
+          "call_oi": 0,
+          "put_oi": 97,
+          "call_chg": 0,
+          "put_chg": 97
+        },
+        {
+          "strike": 41900,
+          "call_oi": 20,
+          "put_oi": 4,
+          "call_chg": 20,
+          "put_chg": 4
+        },
+        {
+          "strike": 42250,
+          "call_oi": 20,
+          "put_oi": 0,
+          "call_chg": 20,
+          "put_chg": 0
+        },
+        {
+          "strike": 42400,
+          "call_oi": 20,
+          "put_oi": 0,
+          "call_chg": 20,
+          "put_chg": 0
+        },
+        {
+          "strike": 42650,
+          "call_oi": 21,
+          "put_oi": 0,
+          "call_chg": 21,
+          "put_chg": 0
+        },
+        {
+          "strike": 42700,
+          "call_oi": 22,
+          "put_oi": 0,
+          "call_chg": 22,
+          "put_chg": 0
+        },
+        {
+          "strike": 44000,
+          "call_oi": 97,
+          "put_oi": 0,
+          "call_chg": 97,
+          "put_chg": 0
+        },
+        {
+          "strike": 44700,
+          "call_oi": 39,
+          "put_oi": 0,
+          "call_chg": 39,
+          "put_chg": 0
+        },
+        {
+          "strike": 45000,
+          "call_oi": 22,
+          "put_oi": 0,
+          "call_chg": 22,
+          "put_chg": 0
+        },
+        {
+          "strike": 46000,
+          "call_oi": 23,
+          "put_oi": 0,
+          "call_chg": 23,
+          "put_chg": 0
+        },
+        {
+          "strike": 46100,
+          "call_oi": 23,
+          "put_oi": 0,
+          "call_chg": 23,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 50173,
+      "total_put_oi": 77752,
+      "max_call_strike": 46000,
+      "max_call_oi": 3405,
+      "max_put_strike": 35000,
+      "max_put_oi": 5223,
+      "top2_call": [
+        {
+          "strike": 46000,
+          "oi": 3405
+        },
+        {
+          "strike": 45000,
+          "oi": 2446
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 35000,
+          "oi": 5223
+        },
+        {
+          "strike": 30000,
+          "oi": 3086
+        }
+      ],
+      "call_range": {
+        "low": 37800,
+        "high": 48300
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 41000
+      },
+      "call_concentration": 6.8,
+      "put_concentration": 6.7,
+      "max_call_chg_strike": 46000,
+      "max_call_chg": 3405,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 35000,
+      "max_put_chg": 5223,
+      "max_put_dec_strike": 46000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2996,
+          "call_chg": 0,
+          "put_chg": 2996
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 3086,
+          "call_chg": 1,
+          "put_chg": 3086
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 2161,
+          "call_chg": 30,
+          "put_chg": 2161
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 5223,
+          "call_chg": 58,
+          "put_chg": 5223
+        },
+        {
+          "strike": 36000,
+          "call_oi": 532,
+          "put_oi": 2027,
+          "call_chg": 532,
+          "put_chg": 2027
+        },
+        {
+          "strike": 37800,
+          "call_oi": 1140,
+          "put_oi": 605,
+          "call_chg": 1140,
+          "put_chg": 605
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1256,
+          "put_oi": 2601,
+          "call_chg": 1256,
+          "put_chg": 2601
+        },
+        {
+          "strike": 38500,
+          "call_oi": 300,
+          "put_oi": 1464,
+          "call_chg": 300,
+          "put_chg": 1464
+        },
+        {
+          "strike": 39000,
+          "call_oi": 591,
+          "put_oi": 1570,
+          "call_chg": 591,
+          "put_chg": 1570
+        },
+        {
+          "strike": 40000,
+          "call_oi": 867,
+          "put_oi": 2029,
+          "call_chg": 867,
+          "put_chg": 2029
+        },
+        {
+          "strike": 41000,
+          "call_oi": 456,
+          "put_oi": 1920,
+          "call_chg": 456,
+          "put_chg": 1920
+        },
+        {
+          "strike": 42000,
+          "call_oi": 1382,
+          "put_oi": 475,
+          "call_chg": 1382,
+          "put_chg": 475
+        },
+        {
+          "strike": 42500,
+          "call_oi": 1516,
+          "put_oi": 36,
+          "call_chg": 1516,
+          "put_chg": 36
+        },
+        {
+          "strike": 43000,
+          "call_oi": 2271,
+          "put_oi": 18,
+          "call_chg": 2271,
+          "put_chg": 18
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1682,
+          "put_oi": 4,
+          "call_chg": 1682,
+          "put_chg": 4
+        },
+        {
+          "strike": 45000,
+          "call_oi": 2446,
+          "put_oi": 1,
+          "call_chg": 2446,
+          "put_chg": 1
+        },
+        {
+          "strike": 46000,
+          "call_oi": 3405,
+          "put_oi": 0,
+          "call_chg": 3405,
+          "put_chg": 0
+        },
+        {
+          "strike": 47500,
+          "call_oi": 1284,
+          "put_oi": 0,
+          "call_chg": 1284,
+          "put_chg": 0
+        },
+        {
+          "strike": 48300,
+          "call_oi": 2165,
+          "put_oi": 0,
+          "call_chg": 2165,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短空長多",
+        "desc": "週選壓力(44,000) < 月選壓力(46,000)，短線有壓但長線看好，預期震盪偏多"
+      },
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(37,200) > 月選支撐(35,000)，短線撐住但長線偏弱，需注意月選結算壓力"
+      }
+    ]
+  },
+  {
+    "date": "2026/05/18",
+    "weekly": {
+      "expiry": "202605W4",
+      "expiry_date": "2026/05/27",
+      "total_call_oi": 1192,
+      "total_put_oi": 2056,
+      "max_call_strike": 44000,
+      "max_call_oi": 211,
+      "max_put_strike": 37000,
+      "max_put_oi": 266,
+      "top2_call": [
+        {
+          "strike": 44000,
+          "oi": 211
+        },
+        {
+          "strike": 42400,
+          "oi": 151
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 37000,
+          "oi": 266
+        },
+        {
+          "strike": 37200,
+          "oi": 260
+        }
+      ],
+      "call_range": {
+        "low": 41000,
+        "high": 45000
+      },
+      "put_range": {
+        "low": 37000,
+        "high": 40200
+      },
+      "call_concentration": 17.7,
+      "put_concentration": 12.9,
+      "max_call_chg_strike": 44000,
+      "max_call_chg": 211,
+      "max_call_dec_strike": 37000,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 37000,
+      "max_put_chg": 266,
+      "max_put_dec_strike": 44000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 37000,
+          "call_oi": 0,
+          "put_oi": 266,
+          "call_chg": 0,
+          "put_chg": 266
+        },
+        {
+          "strike": 37100,
+          "call_oi": 0,
+          "put_oi": 100,
+          "call_chg": 0,
+          "put_chg": 100
+        },
+        {
+          "strike": 37200,
+          "call_oi": 0,
+          "put_oi": 260,
+          "call_chg": 0,
+          "put_chg": 260
+        },
+        {
+          "strike": 37500,
+          "call_oi": 0,
+          "put_oi": 122,
+          "call_chg": 0,
+          "put_chg": 122
+        },
+        {
+          "strike": 37700,
+          "call_oi": 0,
+          "put_oi": 72,
+          "call_chg": 0,
+          "put_chg": 72
+        },
+        {
+          "strike": 38000,
+          "call_oi": 0,
+          "put_oi": 60,
+          "call_chg": 0,
+          "put_chg": 60
+        },
+        {
+          "strike": 38200,
+          "call_oi": 0,
+          "put_oi": 81,
+          "call_chg": 0,
+          "put_chg": 81
+        },
+        {
+          "strike": 39600,
+          "call_oi": 0,
+          "put_oi": 87,
+          "call_chg": 0,
+          "put_chg": 87
+        },
+        {
+          "strike": 40000,
+          "call_oi": 2,
+          "put_oi": 96,
+          "call_chg": 2,
+          "put_chg": 96
+        },
+        {
+          "strike": 40200,
+          "call_oi": 0,
+          "put_oi": 96,
+          "call_chg": 0,
+          "put_chg": 96
+        },
+        {
+          "strike": 41000,
+          "call_oi": 115,
+          "put_oi": 13,
+          "call_chg": 115,
+          "put_chg": 13
+        },
+        {
+          "strike": 41900,
+          "call_oi": 31,
+          "put_oi": 4,
+          "call_chg": 31,
+          "put_chg": 4
+        },
+        {
+          "strike": 42000,
+          "call_oi": 33,
+          "put_oi": 2,
+          "call_chg": 33,
+          "put_chg": 2
+        },
+        {
+          "strike": 42400,
+          "call_oi": 151,
+          "put_oi": 0,
+          "call_chg": 151,
+          "put_chg": 0
+        },
+        {
+          "strike": 42500,
+          "call_oi": 63,
+          "put_oi": 0,
+          "call_chg": 63,
+          "put_chg": 0
+        },
+        {
+          "strike": 42700,
+          "call_oi": 24,
+          "put_oi": 0,
+          "call_chg": 24,
+          "put_chg": 0
+        },
+        {
+          "strike": 44000,
+          "call_oi": 211,
+          "put_oi": 0,
+          "call_chg": 211,
+          "put_chg": 0
+        },
+        {
+          "strike": 44100,
+          "call_oi": 25,
+          "put_oi": 0,
+          "call_chg": 25,
+          "put_chg": 0
+        },
+        {
+          "strike": 44700,
+          "call_oi": 39,
+          "put_oi": 0,
+          "call_chg": 39,
+          "put_chg": 0
+        },
+        {
+          "strike": 45000,
+          "call_oi": 31,
+          "put_oi": 0,
+          "call_chg": 31,
+          "put_chg": 0
+        }
+      ]
+    },
+    "monthly": {
+      "expiry": "202605",
+      "total_call_oi": 78734,
+      "total_put_oi": 104716,
+      "max_call_strike": 43500,
+      "max_call_oi": 4708,
+      "max_put_strike": 35000,
+      "max_put_oi": 7297,
+      "top2_call": [
+        {
+          "strike": 43500,
+          "oi": 4708
+        },
+        {
+          "strike": 42500,
+          "oi": 3451
+        }
+      ],
+      "top2_put": [
+        {
+          "strike": 35000,
+          "oi": 7297
+        },
+        {
+          "strike": 30000,
+          "oi": 5008
+        }
+      ],
+      "call_range": {
+        "low": 41000,
+        "high": 48300
+      },
+      "put_range": {
+        "low": 26900,
+        "high": 40200
+      },
+      "call_concentration": 6.0,
+      "put_concentration": 7.0,
+      "max_call_chg_strike": 43500,
+      "max_call_chg": 4708,
+      "max_call_dec_strike": 26900,
+      "max_call_dec": 0,
+      "max_put_chg_strike": 35000,
+      "max_put_chg": 7297,
+      "max_put_dec_strike": 46000,
+      "max_put_dec": 0,
+      "top10": [
+        {
+          "strike": 26900,
+          "call_oi": 0,
+          "put_oi": 2986,
+          "call_chg": 0,
+          "put_chg": 2986
+        },
+        {
+          "strike": 30000,
+          "call_oi": 1,
+          "put_oi": 5008,
+          "call_chg": 1,
+          "put_chg": 5008
+        },
+        {
+          "strike": 34000,
+          "call_oi": 30,
+          "put_oi": 2163,
+          "call_chg": 30,
+          "put_chg": 2163
+        },
+        {
+          "strike": 35000,
+          "call_oi": 58,
+          "put_oi": 7297,
+          "call_chg": 58,
+          "put_chg": 7297
+        },
+        {
+          "strike": 36000,
+          "call_oi": 532,
+          "put_oi": 2223,
+          "call_chg": 532,
+          "put_chg": 2223
+        },
+        {
+          "strike": 37000,
+          "call_oi": 382,
+          "put_oi": 1842,
+          "call_chg": 382,
+          "put_chg": 1842
+        },
+        {
+          "strike": 38000,
+          "call_oi": 1153,
+          "put_oi": 3525,
+          "call_chg": 1153,
+          "put_chg": 3525
+        },
+        {
+          "strike": 39000,
+          "call_oi": 582,
+          "put_oi": 3795,
+          "call_chg": 582,
+          "put_chg": 3795
+        },
+        {
+          "strike": 40000,
+          "call_oi": 880,
+          "put_oi": 2831,
+          "call_chg": 880,
+          "put_chg": 2831
+        },
+        {
+          "strike": 40200,
+          "call_oi": 189,
+          "put_oi": 1821,
+          "call_chg": 189,
+          "put_chg": 1821
+        },
+        {
+          "strike": 41000,
+          "call_oi": 1520,
+          "put_oi": 1448,
+          "call_chg": 1520,
+          "put_chg": 1448
+        },
+        {
+          "strike": 41500,
+          "call_oi": 1686,
+          "put_oi": 296,
+          "call_chg": 1686,
+          "put_chg": 296
+        },
+        {
+          "strike": 42000,
+          "call_oi": 2860,
+          "put_oi": 375,
+          "call_chg": 2860,
+          "put_chg": 375
+        },
+        {
+          "strike": 42500,
+          "call_oi": 3451,
+          "put_oi": 59,
+          "call_chg": 3451,
+          "put_chg": 59
+        },
+        {
+          "strike": 43000,
+          "call_oi": 2931,
+          "put_oi": 16,
+          "call_chg": 2931,
+          "put_chg": 16
+        },
+        {
+          "strike": 43500,
+          "call_oi": 4708,
+          "put_oi": 9,
+          "call_chg": 4708,
+          "put_chg": 9
+        },
+        {
+          "strike": 44000,
+          "call_oi": 1749,
+          "put_oi": 4,
+          "call_chg": 1749,
+          "put_chg": 4
+        },
+        {
+          "strike": 45000,
+          "call_oi": 3197,
+          "put_oi": 0,
+          "call_chg": 3197,
+          "put_chg": 0
+        },
+        {
+          "strike": 46000,
+          "call_oi": 3424,
+          "put_oi": 0,
+          "call_chg": 3424,
+          "put_chg": 0
+        },
+        {
+          "strike": 48300,
+          "call_oi": 2165,
+          "put_oi": 0,
+          "call_chg": 2165,
+          "put_chg": 0
+        }
+      ]
+    },
+    "signals": [
+      {
+        "type": "短多長空",
+        "desc": "週選支撐(37,000) > 月選支撐(35,000)，短線撐住但長線偏弱，需注意月選結算壓力"
+      },
+      {
+        "type": "多頭一致",
+        "desc": "週選月選壓力支撐對齊，趨勢明確偏多，震盪幅度較小"
+      }
+    ]
   }
 ]

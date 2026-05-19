@@ -46,5 +46,89 @@
     "dealer_total": -41.42,
     "total": 573.22,
     "foreign_5d": 1924.83
+  },
+  {
+    "date": "2026/05/08",
+    "foreign": -120.85,
+    "foreign_dealer": 0.0,
+    "foreign_total": -120.85,
+    "trust": 19.57,
+    "dealer_self": -26.19,
+    "dealer_hedge": -74.18,
+    "dealer_total": -100.37,
+    "total": -201.64,
+    "foreign_5d": 1803.98
+  },
+  {
+    "date": "2026/05/11",
+    "foreign": -109.84,
+    "foreign_dealer": 0.0,
+    "foreign_total": -109.84,
+    "trust": 124.88,
+    "dealer_self": 7.9,
+    "dealer_hedge": 29.41,
+    "dealer_total": 37.31,
+    "total": 52.35,
+    "foreign_5d": 1024.38
+  },
+  {
+    "date": "2026/05/12",
+    "foreign": -304.94,
+    "foreign_dealer": 0.0,
+    "foreign_total": -304.94,
+    "trust": 383.17,
+    "dealer_self": -47.53,
+    "dealer_hedge": -159.11,
+    "dealer_total": -206.64,
+    "total": -128.4,
+    "foreign_5d": 679.54
+  },
+  {
+    "date": "2026/05/13",
+    "foreign": -434.29,
+    "foreign_dealer": 0.0,
+    "foreign_total": -434.29,
+    "trust": 260.62,
+    "dealer_self": -51.46,
+    "dealer_hedge": -251.2,
+    "dealer_total": -302.66,
+    "total": -476.34,
+    "foreign_5d": -505.8
+  },
+  {
+    "date": "2026/05/14",
+    "foreign": 45.43,
+    "foreign_dealer": 0.0,
+    "foreign_total": 45.43,
+    "trust": 142.96,
+    "dealer_self": -9.0,
+    "dealer_hedge": -3.63,
+    "dealer_total": -12.63,
+    "total": 175.76,
+    "foreign_5d": -924.49
+  },
+  {
+    "date": "2026/05/15",
+    "foreign": -104.27,
+    "foreign_dealer": 0.0,
+    "foreign_total": -104.27,
+    "trust": -13.67,
+    "dealer_self": -52.95,
+    "dealer_hedge": -196.48,
+    "dealer_total": -249.43,
+    "total": -367.37,
+    "foreign_5d": -907.91
+  },
+  {
+    "date": "2026/05/18",
+    "foreign": -452.41,
+    "foreign_dealer": 0.0,
+    "foreign_total": -452.41,
+    "trust": 166.65,
+    "dealer_self": -10.95,
+    "dealer_hedge": -128.32,
+    "dealer_total": -139.27,
+    "total": -425.03,
+    "foreign_5d": -1250.48
   }
 ]

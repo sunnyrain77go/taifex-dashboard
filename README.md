@@ -50,6 +50,7 @@ python fetch_taifex.py 2026/05/07
 ```
 
 ### 4. 匯出彙整報表
+- 會「重寫」Excel 檔案（taifex_summary.xlsx），內容就是目前 data 資料夾下所有 JSON 檔案的所有資料。
 ```bash
 python export_data.py
 ```
