@@ -29,6 +29,32 @@
 - `utils.py` / `config.py`: 底層工具函式與路徑設定。
 - `data/`: 歷史數據庫，包含 `futures.json`, `options_pc.json`, `pc_ratio.json`, `oi_strike.json`, `stock_net.json`。
 
+## 🌐 公開資料來源網址
+
+以下為本專案實際向外部網站抓取資料的主要網址：
+
+- 台灣期交所 期貨三大法人未平倉（台指期）：
+   `https://www.taifex.com.tw/cht/3/futContractsDate`
+   （`fetch_taifex.py` 模組1）
+- 台灣期交所 選擇權三大法人部位（Call/Put）：
+   `https://www.taifex.com.tw/cht/3/callsAndPutsDate`
+   （`fetch_taifex.py` 模組2）
+- 台灣期交所 Put/Call Ratio：
+   `https://www.taifex.com.tw/cht/3/pcRatio`
+   （`fetch_taifex.py` 模組3）
+- 台灣期交所 選擇權每日 OI 下載頁（先取 Cookie）：
+   `https://www.taifex.com.tw/cht/3/dlOptDailyMarketView`
+   （`options_analysis.py`）
+- 台灣期交所 選擇權資料下載端點（CSV）：
+   `https://www.taifex.com.tw/cht/3/dlOptDataDown`
+   （`options_analysis.py`）
+- 台灣證交所 三大法人買賣超（現貨）：
+   `https://www.twse.com.tw/rwd/zh/fund/BFI82U`
+   （`fetch_stock_net.py`）
+
+補充：
+- `options_analysis.py` 另透過 `yfinance` 取得 `^TWII`（台灣加權指數）收盤價，用於履約價範圍過濾。
+
 ## 🚀 快速開始
 
 ### 1. 安裝環境
